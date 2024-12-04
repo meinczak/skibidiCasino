@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Black Jack</title>
+    <link rel="icon" type="image/x-icon" href="../logo_smol1.png">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="blackJakcStyle.css">
+</head>
+
+<body>
+    <header>
+        <div class="leftContainer">
+            <div class="logo"><a class="logo" href="../index.html"><img id="logo" src="../logo0.png"> Skibidi Casino</a></div>
+        </div>
+        <div class="rightContainer">
+            <div class="accountbar">
+
+                <div class="balance">
+                    <a href="../balance/balance.html">
+                    <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" stroke="rgb(123,44,191)" ; stroke-width="5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M5 12H19M12 5V19" />
+                    </svg></a>&nbsp;0.00
+                </div>
+                <a href="../account/settings.html">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" stroke-width="2.4">
+                    <path d="M16.29,13.19a6,6,0,0,1-8.58,0A5,5,0,0,0,4,18v1s2,2,8,2,8-2,8-2V18a5,5,0,0,0-3.71-4.81Z" />
+                    <path d="M7.46,13.26A5,5,0,0,0,4,18v1s2,2,8,2,8-2,8-2V18a5,5,0,0,0-3.51-4.75" />
+                    <circle cx="12" cy="9" r="6" />
+                </svg></a>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+                    <path d="M3 12H21M3 18H21M3 6H21" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" />
+                </svg>
+
+
+
+            </div>
+            <nav>
+                <a href="../cashout/cashout.html">Cashout</a>
+                <a href="../gamble responsibly/gamble responsibly.html">Gamble <br>responsibly</a>
+                <a href="../support/support.html">Support</a>
+                <a>Logout</a>
+            </nav>
+        </div>
+    </header>
+    <div id="popUp">
+        <div class="popUpLogo">Black Jack</div>
+        <div class="stationSelector">
+            <div class="popUpStation">
+                <h1>Station 1</h1>
+                <h3>Insert Your Bet</h3>
+                <input id="input1" type="number" min="0">
+            </div>
+            <div class="popUpStation">
+                <h1>Station 2</h1>
+                <h3>Insert Your Bet</h3>
+                <input id="input2" type="number" min="0">
+            </div>
+            <div class="popUpStation">
+                <h1>Station 3</h1>
+                <h3>Insert Your Bet</h3>
+                <input id="input3" type="number" min="0">
+            </div>
+        </div>
+        <div class="buttonWrapper">
+            <button onclick="start()" id="startBtn">PLAY</button>
+        </div>
+    </div>
+    <div id="container" class="dark">
+        <div class="dealersTable">
+            <div class="station">
+                <h1>Dealer</h1>
+                <div class="cardTotal" id="dealersTotalDisplay">total</div>
+                <div class="cardDisplay" id="dealersCardsDisplay"></div>
+            </div>
+        </div>
+        <div class="playersTable">
+            <div class="station" id="station1">
+                <h1>Station 1</h1>
+                <div class="cardTotal" id="station1Total">total 1</div>
+                <div class="cardDisplay" id="station1CardsDisplay"> </div>
+                <div class="betValue" id="station1BetDisplay"></div>
+            </div>
+            <div class="station" id="station2">
+                <h1>Station 2</h1>
+                <div class="cardTotal" id="station2Total">total 2</div>
+                <div class="cardDisplay" id="station2CardsDisplay"> </div>
+                <div class="betValue" id="station2BetDisplay">ALL-IN</div>
+            </div>
+            <div class="station" id="station3">
+                <h1>Station 3</h1>
+                <div class="cardTotal" id="station3Total">total 3</div>
+                <div class="cardDisplay" id="station3CardsDisplay"> </div>
+                <div class="betValue" id="station3BetDisplay">ALL-IN</div>
+            </div>
+        </div>
+        <div class="actionBar">
+            <div class="actionBtn" id="hitBtn" onclick="hit()">Hit</div>
+            <div class="actionBtn" id="splitBtn" onclick="split()">Split</div>
+            <div class="actionBtn" id="doubleBtn" onclick="double()">Double</div>
+            <div class="actionBtn" id="standBtn" onclick="stand()">Stand</div>
+        </div>
+    </div>
+    <script src="blackJackScript.js"></script>
+</body>
+
+</html>

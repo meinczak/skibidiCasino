@@ -1,0 +1,272 @@
+.mainContainer {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    z-index: -1;
+}
+main {
+    width: 65vw;
+    height: 75vh;
+    margin-top: 10vh;
+    background-color: #0c0c0c;
+    border-radius: 15px;    
+}
+.logobar {
+    height: 8vh;
+    width: 65vw;
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 5vh;
+    font-weight: 800;
+}   
+.gameContainer {
+    display: flex;
+}
+aside {
+   
+    height: 67vh;
+    width: 20vw;
+    padding-left: 50px;
+    padding-right: 50px;
+    text-align: center;
+}
+label {
+    color: white;
+    font-weight: 500;
+    font-size: 20px;
+    margin-top: 20px;
+}
+.betBar {
+    background-color: #272727;
+    padding: 10px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: right;
+    width: 18.5vw;
+    align-items: center;
+}
+.betInput {
+    width: 10vw;
+    outline: none;
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 18px; 
+    text-align: left; 
+    padding: 5px;
+    box-sizing: border-box; 
+    overflow: hidden; 
+    white-space: nowrap; 
+}
+.betInput::-webkit-inner-spin-button,
+.betInput::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+.changeInputBtn {
+    height: 35px;
+    width: 50px; 
+    text-align: center;
+    padding: 8px;
+    margin-left: 5px;
+    cursor: pointer;
+    background-color: #545454; 
+    color: white;
+    border: none;
+    border-radius: 10px; 
+    transition-duration: 0.5s;
+
+}
+.changeInputBtn:hover{
+background-color: rgb(123, 44, 191);
+
+
+}
+.betBtn {
+    width: 20vw;
+    border: none;
+    border-radius: 15px;
+    background-color: rgba(123, 44, 191, 1);
+    color: white;
+    padding: 10px;
+    
+    font-size: 3vh;
+    margin-top: 20px;
+    transition-duration: 1s;
+}
+.betBtn:hover{
+    background-color: #272727;
+
+
+}
+
+.select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.minesInput {
+    width: 100%;
+    background-color: #272727;
+    color: white;
+    border: 1px solid #545454;
+    border-radius: 15px;
+    padding: 8px;
+    font-size: 16px;
+    text-align: center;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    cursor: pointer;
+    padding-right: 30px; 
+    
+}
+select::-webkit-scrollbar {
+    display: none; 
+    
+}
+
+select {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;     
+}
+
+.arrow {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg); 
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid white;
+    pointer-events: none;
+    transition: transform 0.3s ease; 
+}
+.minesInput:focus + .arrow {
+    transform: translateY(-50%) rotate(0deg); 
+}
+.display {
+    width: 45vw;
+    height: 67vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+table {
+    border-spacing: 15px;
+    
+}
+.gameTable td {
+    width: 80px;
+    height: 80px;
+    background-color: #272727;
+    text-align: center;
+    border-radius: 15px;
+    transition-duration: 0.5s;
+    cursor: pointer;
+}
+td:hover
+{
+    background-color: rgba(123, 44, 191, 1);
+
+
+}
+#gemsRemaining , #minesRemaining{
+    background-color: #272727;
+    border: none;
+    text-align: center;
+    
+    font-size:20px ;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    padding: 10px;
+    width: 8.1vw;
+    
+    background-size: 30px 30px;
+    background-position: 10px center;
+}
+ #gemsRemaining{
+    
+    background-image: url('gem.svg');
+    
+}
+#minesRemaining
+{
+   
+    background-image: url('mine.svg');
+  
+    
+}
+#gameInfo
+{
+    display: flex;
+    
+}
+img {
+    height: 7.5vh;
+    width: auto;
+    border-radius: 0;
+}
+#profit{
+    background-color: #272727;
+    border: none;
+    text-align: center;
+    margin-top: 10px;
+    font-size:20px ;
+    color: white;
+    outline: none;
+    cursor: pointer;
+  
+    border-radius: 15px;
+    padding: 10px;
+    width: 18.5vw;
+   
+
+
+}
+#cashoutBtn, #randomTileBtn{
+    background-color: #272727;
+    border: none;
+    text-align: center;
+    
+    font-size:15px ;
+    color: white;
+    outline: none;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    border-radius: 15px;
+    padding: 10px;
+    margin-top: 5px;
+    transition-duration: 1s;
+}
+#cashoutBtn:hover, #randomTileBtn:hover{
+    background-color: rgba(123, 44, 191, 1);
+    
+}
+#cashoutBtn{
+flex: 25%;
+margin-left: 2.5px;
+
+}
+#randomTileBtn{
+flex: 75%;
+margin-right: 2.5px;
+
+}
+
+.btns{
+display: flex;
+width: 100%;
+
+}

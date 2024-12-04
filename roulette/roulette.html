@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Roulette</title>
+    <link rel="shortcut icon" href="../logo_smol1.png" type="image/x-icon">
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="rouletteStyle.css">
+</head>
+<body>
+    <header>
+        <div class="leftContainer">
+            <div class="logo"><a class="logo" href="../index.html"><img id="logo" src="../logo0.png"> Skibidi Casino</a></div>
+        </div>
+        <div class="rightContainer">
+            <div class="accountbar">
+
+                <div class="balance">
+                    <a href="../balance/balance.html">
+                    <svg width="24" height="24" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"
+                        fill="none" stroke="rgb(123,44,191)" ; stroke-width="5" stroke-linecap="round"
+                        stroke-linejoin="round">
+                        <path d="M5 12H19M12 5V19" />
+                    </svg></a>&nbsp;0.00
+                </div>
+                <a href="../account/settings.html">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" stroke-width="2.4">
+                    <path d="M16.29,13.19a6,6,0,0,1-8.58,0A5,5,0,0,0,4,18v1s2,2,8,2,8-2,8-2V18a5,5,0,0,0-3.71-4.81Z" />
+                    <path d="M7.46,13.26A5,5,0,0,0,4,18v1s2,2,8,2,8-2,8-2V18a5,5,0,0,0-3.51-4.75" />
+                    <circle cx="12" cy="9" r="6" />
+                </svg></a>
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="40" height="40">
+                    <path d="M3 12H21M3 18H21M3 6H21" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4" />
+                </svg>
+
+
+
+            </div>
+            <nav>
+                <a href="../cashout/cashout.html">Cashout</a>
+                <a href="../gamble responsibly/gamble responsibly.html">Gamble <br>responsibly</a>
+                <a href="../support/support.html">Support</a>
+                <a>Logout</a>
+            </nav>
+        </div>
+    </header>
+    <div class="main">
+        <div class="lContainer">
+            
+                <div class="roulette-container">
+                  <div class="wrap">
+                    <div class="controller"></div>
+                  </div>
+                </div><br>
+
+              <div class="chip_container">
+                <button class="chip" onclick="chipTotal(1)" >1</button>
+                <button class="chip" onclick="chipTotal(5)" >5</button>
+                <button class="chip" onclick="chipTotal(10)" >10</button>
+                <button class="chip" onclick="chipTotal(100)">100</button>
+                
+            </div>
+            <button id="placeBet">postaw zakład</button>
+        </div>
+        <div class="RContainer">
+            <table id="betType">
+                <tr>
+                    <td data-type="number" data-value="0" id="0" class="green" onclick="table(0)" rowspan="3">0</td>
+                    <td data-type="number" data-value="2" id="1" class="green" onclick="table(1)">2</td>
+                    <td data-type="number" data-value="8" id="2" class="black" onclick="table(2)">8</td>
+                    <td data-type="number" data-value="18" id="3" class="red" onclick="table(3)">18</td>
+                    <td data-type="number" data-value="9" id="4" class="black" onclick="table(4)">9</td>
+                    <td data-type="number" data-value="19" id="5" class="red" onclick="table(5)">19</td>
+                    <td data-type="number" data-value="20" id="6" class="red" onclick="table(6)">20</td>
+                    <td data-type="number" data-value="21" id="7" class="red" onclick="table(7)">21</td>
+                </tr>
+                <tr>
+                    <td data-type="number" data-value="3" id="8" class="green" onclick="table(8)">3</td>
+                    <td data-type="number" data-value="4" id="9" class="black" onclick="table(9)">4</td>
+                    <td data-type="number" data-value="10" id="10" class="red" onclick="table(10)">10</td>
+                    <td data-type="number" data-value="5" id="11" class="black" onclick="table(11)">5</td>
+                    <td data-type="number" data-value="11" id="12" class="red" onclick="table(12)">11</td>
+                    <td data-type="number" data-value="12" id="13" class="red" onclick="table(13)">12</td>
+                    <td data-type="number" data-value="13" id="14" class="red" onclick="table(14)">13</td>
+                </tr>
+                <tr>
+                    <td data-type="number" data-value="1" id="15" class="green" onclick="table(15)">1</td>
+                    <td data-type="number" data-value="6" id="16" class="black" onclick="table(16)">6</td>
+                    <td data-type="number" data-value="14" id="17" class="red" onclick="table(17)">14</td>
+                    <td data-type="number" data-value="7" id="18" class="black" onclick="table(18)">7</td>
+                    <td data-type="number" data-value="15" id="19" class="red" onclick="table(19)">15</td>
+                    <td data-type="number" data-value="16" id="20" class="red" onclick="table(20)">16</td>
+                    <td data-type="number" data-value="17" id="21" class="red" onclick="table(21)">17</td>
+                </tr>
+                <tr>
+                    <td data-type="color" data-value="red" class="red" colspan="3" id="22" onclick="table(22)">purple</td>
+                    <td data-type="color" data-value="green" class="green" colspan="2" id="23" onclick="table(23)">pink</td>
+                    <td data-type="color" data-value="black" class="black" colspan="3" id="24" onclick="table(24)">black</td>
+                </tr>
+                <tr>
+                    <td data-type="parity" data-value="odd" id="25" onclick="table(25)">odd</td>
+                    <td data-type="range" data-value="1 to 7" colspan="2" id="26" onclick="table(26)">1 to 7</td>
+                    <td data-type="range" data-value="8 to 14" colspan="2" id="27" onclick="table(27)">8 to 14</td>
+                    <td data-type="range" data-value="14 to 21" colspan="2" id="28" onclick="table(28)">14 to 21</td>
+                    <td data-type="parity" data-value="even" id="29" onclick="table(29)">even</td>
+                </tr>         
+            </table>
+        </div>          
+    </div>
+    <footer>
+        <div class="info"></div>
+        <div class="info"></div>
+        <div class="info"></div>
+        <div class="info"></div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
