@@ -3,9 +3,19 @@ let currentBets = []; // Tablica na różne zakłady
 
 function chipTotal(value) {
     totalchip += value;
-    console.log(`Dodano ${value}, całkowity zakład: ${totalchip}`);
+    document.getElementById("chipvalue").innerHTML = totalchip;
 }
-
+function resetChip()
+{
+    document.getElementById("chipvalue").innerHTML = "";
+    totalchip = 0;
+}
+function resetTable()
+{
+    document.querySelectorAll('.chipontable').forEach(el => el.remove());
+    currentBets=[];
+    
+}
 function table(grid) {
     var clickedCell = document.getElementById(grid);
 
