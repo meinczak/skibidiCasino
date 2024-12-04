@@ -54,14 +54,20 @@
                   </div>
                 </div><br>
 
-              <div class="chip_container">
+              <div class="container_chip">
+                <div class="chip_container">
                 <button class="chip" onclick="chipTotal(1)" >1</button>
                 <button class="chip" onclick="chipTotal(5)" >5</button>
                 <button class="chip" onclick="chipTotal(10)" >10</button>
                 <button class="chip" onclick="chipTotal(100)">100</button>
                 
             </div>
-            <button id="placeBet">postaw zakład</button>
+            <button id="placeBet">Place bet</button><button onclick="resetTable()">Reset bet</button><button onclick="resetChip()">Reset chip</button>
+                <button class="chip" id="chipvalue"></button>
+                
+            </div>
+            
+            
         </div>
         <div class="RContainer">
             <table id="betType">
