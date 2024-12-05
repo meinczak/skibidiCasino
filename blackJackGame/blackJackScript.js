@@ -244,16 +244,22 @@ function stand() {
         while (dealer.handValue < 17) {
             draw("dealer");
         }
+
+        if (dealer.handValue > 21) {
+            dealer.hasBusted = true;
+        }
         
         for (let i = 0; i < playingStations.length; i++) {
             if (playingStations[i].hasBusted) {
                 
-            } else if (playingStations[i].totalDisplay.innerHTML == "Black Jack!") {
+            } else if (playingStations[i].totalDisplay.innerHTML == "Black Jack!" && playingStations[i].handValue > dealer.handValue) {
                 gameWinnings += playingStations[i].betValue * 2.5;
             } else if (dealer.hasBusted) {
                 gameWinnings += playingStations[i].betValue * 2;
             } else if (playingStations[i].handValue > dealer.handValue) {
                 gameWinnings += playingStations[i].betValue * 2;
+            } else if (playingStations[i].handValue == dealer.handValue) {
+                gameWinnings += playingStations[i].betValue;
             }
         }
         console.log(gameWinnings);
