@@ -37,7 +37,6 @@
     overflow: hidden;
     position: relative;
 
-
 }
 
 .more,
@@ -102,7 +101,7 @@
     font-weight: 500;
 }
 
-.minesweeper:hover .gamename, .slot:hover .gamename, .roulete:hover .gamename, .blackjack:hover .gamename{
+.minesweeper:hover .gamename, .slot:hover .gamename, .roulete:hover .gamename, .blackjack:hover .gamename, .more:hover .gamename{
     opacity: 1;
 }
 
