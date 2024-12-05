@@ -59,7 +59,7 @@ let currentPlayingStation;
 
 let dealer = {handValue: 0, aceCount: 0, hasBusted: false};
 class Station {
-    constructor(handValue, aceCount, betValue, hasBusted, betInput, cardsDisplay, totalDisplay, betDisplay, stationId) {
+    constructor(handValue, aceCount, betValue, hasBusted, betInput, cardsDisplay, totalDisplay, betDisplay, status, stationId) {
         this.handValue = handValue;
         this.aceCount = aceCount;
         this.betValue = betValue;
@@ -68,13 +68,14 @@ class Station {
         this.cardsDisplay = cardsDisplay;
         this.totalDisplay = totalDisplay;
         this.betDisplay = betDisplay;
+        this.status = status;
         this.stationId = stationId;
     }
 }
 
-let station1 = new Station(0, 0, 0, false, document.getElementById("input1"), document.getElementById("station1CardsDisplay"), document.getElementById("station1Total"), document.getElementById("station1BetDisplay"), document.getElementById("station1"));
-let station2 = new Station(0, 0, 0, false, document.getElementById("input2"), document.getElementById("station2CardsDisplay"), document.getElementById("station2Total"), document.getElementById("station2BetDisplay"), document.getElementById("station2"));
-let station3 = new Station(0, 0, 0, false, document.getElementById("input3"), document.getElementById("station3CardsDisplay"), document.getElementById("station3Total"), document.getElementById("station3BetDisplay"), document.getElementById("station3"));
+let station1 = new Station(0, 0, 0, false, document.getElementById("input1"), document.getElementById("station1CardsDisplay"), document.getElementById("station1Total"), document.getElementById("station1BetDisplay"), document.getElementById("station1Status"), document.getElementById("station1"));
+let station2 = new Station(0, 0, 0, false, document.getElementById("input2"), document.getElementById("station2CardsDisplay"), document.getElementById("station2Total"), document.getElementById("station2BetDisplay"), document.getElementById("station2Status"), document.getElementById("station2"));
+let station3 = new Station(0, 0, 0, false, document.getElementById("input3"), document.getElementById("station3CardsDisplay"), document.getElementById("station3Total"), document.getElementById("station3BetDisplay"), document.getElementById("station3Status"), document.getElementById("station3"));
 
 
 function draw(target) {
@@ -201,7 +202,7 @@ function start() {
     for (let i = 0; i < playingStations.length; i++) {
         draw(playingStations[i]);
         if (playingStations[i].handValue == 21) {
-            playingStations[i].totalDisplay.innerHTML = "Black Jack!";
+            playingStations[i].status.innerHTML = "Black Jack!";
         }
     }
 
@@ -220,16 +221,16 @@ function hit() {
     draw(playingStations[currentPlayingStation]);
 
     if (playingStations[currentPlayingStation].handValue > 21) {
-        playingStations[currentPlayingStation].totalDisplay.innerHTML = `Bust! <br> ${playingStations[currentPlayingStation].handValue}`;
+        playingStations[currentPlayingStation].status.innerHTML = "BUST!";
         playingStations[currentPlayingStation].hasBusted = true;   
     }
     if (playingStations[currentPlayingStation].handValue >= 21) {       
         stand();
     }
+    
 }
 
 function stand() {
-
     playingStations[currentPlayingStation].stationId.classList.remove("stationSelected");
     currentPlayingStation++
     if (currentPlayingStation + 1 > playingStations.length) {

@@ -39,6 +39,7 @@
     background-color: hsla(221 100% 0% / 0.5);
     border-radius: 20px;
     transition-duration: 0.2s;
+    justify-content: center;
 }
 .stationSelected {
    box-shadow: 0 0 15px white;
@@ -119,8 +120,10 @@ img:hover {
     height: 60vh;
     width: 60vw;
     background-color: black;
-    margin-left: 20vw;
-    border-radius: 20px;
+    left: 0; 
+    right: 0; 
+    margin-inline: auto; 
+    width: fit-content;
 }
 .popUpLogo {
     height: 10vh;
@@ -185,4 +188,17 @@ input[type=number] {
 #startBtn:active{
     background-color: white;
     color: rgb(169, 130, 202);
+}
+.statusDisplay {
+    z-index: 1;
+    color: black;
+    position: absolute;
+    width: fit-content;
+    margin-top: 50px;
+    font-size: 50px;
+    font-weight: 700;
+    text-align: center;
+    
+    pointer-events: none;
+    background-color: green;
 }
