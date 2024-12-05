@@ -1,6 +1,6 @@
 let totalchip = 0;
 let currentBets = []; // Tablica na różne zakłady
-
+let chips=[];
 function chipTotal(value) {
     totalchip += value;
     document.getElementById("chipvalue").innerHTML = totalchip;
@@ -12,8 +12,12 @@ function resetChip()
 }
 function resetTable()
 {
+   
     document.querySelectorAll('.chipontable').forEach(el => el.remove());
     currentBets=[];
+    document.querySelectorAll("#betType td").forEach(cell => {
+        cell.innerHTML = cell.dataset.value;})
+   
     
 }
 function table(grid) {
@@ -38,8 +42,15 @@ function table(grid) {
             var chip = document.createElement("button");
             chip.className = "chipontable";
             chip.innerHTML = `${totalchip}`;
+            chip.setAttribute('data-number', totalchip);
+            chip.setAttribute('data-grid', betValue)
             clickedCell.innerHTML = '';
             clickedCell.appendChild(chip);
+            chips.push({
+                number: totalchip,
+                grid: betValue
+            })
+            console.log(`utworzono chip o wartości ${chips.number}`)
         } else {
             alert("Najpierw dodaj żetony!");
         }
@@ -109,44 +120,51 @@ function table(grid) {
         // Wywołanie animacji ruletki
         spin_promise(color, bet).then(() => {
             let winBets = 0; // Liczba wygranych zakładów
-            let winAmount = 0; // Suma wygranej
-
+           
             // Oblicz stawkę na jeden zakład
-            let betPerBet = totalchip / currentBets.length;
-
+           
+            let totalWin = totalchip;
             // Sprawdzanie warunków wygranej dla każdego zakładu
             currentBets.forEach((currentBet) => {
                 let win = false;
                 if (currentBet.type === "number" && currentBet.value == bet) {
                     win = true;
+                    totalWin = totalWin*22;
                 } else if (currentBet.type === "color" && currentBet.value === color) {
                     win = true;
+                    totalWin = totalWin*3;
                 } else if (currentBet.type === "parity" && 
                            ((currentBet.value === "odd" && bet % 2 !== 0) || 
                             (currentBet.value === "even" && bet % 2 === 0))) {
                     win = true;
+                    totalWin = totalWin*2;
                 } else if (currentBet.type === "range") {
                     if ((currentBet.value === "1 to 7" && bet >= 1 && bet <= 7) ||
                         (currentBet.value === "8 to 14" && bet >= 8 && bet <= 14) ||
                         (currentBet.value === "15 to 21" && bet >= 15 && bet <= 21)) {
                         win = true;
+                        totalWin = totalWin*3;
                     }
                 }
 
                 // Jeśli wygrana, zliczamy ją
                 if (win) {
                     winBets++;
-                    winAmount += betPerBet;
+            
                 }
             });
 
             // Wygrana całkowita
-            let totalWin = winAmount;
+            
 
             if (winBets > 0) {
-                alert(`Wygrałeś! Wygrana: ${totalWin}\nZakłady: ${winBets} wygranych`);
+                alert(`Wygrałeś! Wygrana: ${totalWin}`);
+                resetChip();
+                resetTable();
             } else {
                 alert("Przegrałeś!");
+                resetChip();
+                resetTable();
             }
 
             // Reset zakładów
@@ -154,6 +172,8 @@ function table(grid) {
 
             // Odblokowanie przycisku po zakończeniu gry
             document.getElementById('placeBet').disabled = false;
+            document.getElementById('resetchip').disabled = false;
+            document.getElementById('resetbet').disabled = false;
         });
     }
 
@@ -170,9 +190,8 @@ function table(grid) {
 
         // Zablokowanie przycisku zakładu na czas gry
         document.getElementById('placeBet').disabled = true;
-
-        // Pokazanie alertu przed rozpoczęciem gry
-        alert(`Stawiasz ${totalchip} na: ${currentBets.map(b => `${b.type}: ${b.value}`).join(', ')}`);
+            document.getElementById('resetchip').disabled = true;
+            document.getElementById('resetbet').disabled = true;
 
         // Rozpoczynamy grę
         play(currentBets[0].type, currentBets[0].value, totalchip);
