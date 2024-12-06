@@ -41,6 +41,7 @@ const deck = [
 ];
 const dealersTotalDisplay = document.getElementById("dealersTotalDisplay");         
 const dealersCardsDisplay = document.getElementById("dealersCardsDisplay");
+const dealerStatus = document.getElementById("dealerStatus");
 const hitBtn = document.getElementById("hitBtn");                                  
 const doubleBtn = document.getElementById("doubleBtn");
 const standBtn = document.getElementById("standBtn");
@@ -242,6 +243,10 @@ function stand() {
         document.getElementById("hiddenCardDisplay").src = `deck/${deck[hiddenCard].cardValue}${deck[hiddenCard].suit}.png`;
         dealersTotalDisplay.innerHTML = dealer.handValue;
         
+        if (dealer.handValue == 21) {
+            dealerStatus.innerHTML = "Black Jack!";
+        }
+        
         while (dealer.handValue < 17) {
             draw("dealer");
         }
@@ -252,15 +257,22 @@ function stand() {
         
         for (let i = 0; i < playingStations.length; i++) {
             if (playingStations[i].hasBusted) {
-                
-            } else if (playingStations[i].totalDisplay.innerHTML == "Black Jack!" && playingStations[i].handValue > dealer.handValue) {
+                playingStations[i].status.innerHTML = "BUST! You Lose!";
+            } else if (playingStations[i].status.innerHTML == "Black Jack!" && dealerStatus.innerHTML != "Black Jack!") {
                 gameWinnings += playingStations[i].betValue * 2.5;
+                playingStations[i].status.innerHTML = "Black Jack! You Win!";
             } else if (dealer.hasBusted) {
                 gameWinnings += playingStations[i].betValue * 2;
+                dealerStatus.innerHTML = "Bust!";
+                playingStations[i].status.innerHTML = "You Win!";
             } else if (playingStations[i].handValue > dealer.handValue) {
                 gameWinnings += playingStations[i].betValue * 2;
+                playingStations[i].status.innerHTML = "You Win!";
             } else if (playingStations[i].handValue == dealer.handValue) {
                 gameWinnings += playingStations[i].betValue;
+                playingStations[i].status.innerHTML = "Tie!";
+            } else {
+                playingStations[i].status.innerHTML = "You Lose!";
             }
         }
         console.log(gameWinnings);
