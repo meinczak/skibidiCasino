@@ -11,7 +11,7 @@
 body {
     margin: 0;
     height: 100%;
-    background-color: #6c757d;
+    background-color: #1a1a1a;
     color: #545454;
     overflow: hidden;
 }
@@ -64,14 +64,14 @@ nav {
     float: right;
     border-radius: 0px;
     border-top-left-radius: 600px;
-    background-color: #272727;
+    background-color: #1a1a1a;
     -webkit-clip-path: polygon(0 0, 0 0%, 100% 100%, 100% 25%, 75% 0);
-    clip-path: polygon(5% 0, 0 100%, 100% 100%, 100% 25%, 100% 0);
+    clip-path: polygon(0 0, 0 100%, 100% 100%, 100% 25%, 100% 0);
     transition-duration: 0.5s;
     display: flex;
     justify-content: space-around;
     align-items: center;
-    font-weight: 900;
+    font-weight: 800;
     text-align: center;
 }
 
@@ -102,9 +102,9 @@ a:hover {
 .balance {
     font-size: 3vh;
     font-weight: 900;
-    background-color: #272727;
+    background-color: #1a1a1a;
     padding: 6px;
-    border-radius: 40px;
+    border-radius: 20px;
     min-width: 100px;
     display: flex;
     align-items: center;

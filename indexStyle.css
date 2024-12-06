@@ -7,6 +7,7 @@
     border-radius: 40px;
 }
 
+
 .roulete,
 .blackjack,
 .slot,
@@ -103,7 +104,7 @@
 
 .minesweeper:hover .gamename, .slot:hover .gamename, .roulete:hover .gamename, .blackjack:hover .gamename, .more:hover .gamename{
     opacity: 1;
-}
+} 
 
 
 
