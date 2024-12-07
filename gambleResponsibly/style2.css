@@ -1,0 +1,25 @@
+.main{
+    background-color: #0c0c0c;
+    width: 70vw;
+    height: 90vh;
+    border-radius: 40px;
+    padding: 50px;
+    margin-left: 15vw;
+    color: #cccccc;
+    font-size: 16px;
+    position: absolute;
+    margin-top: 20vh;
+    top:0;
+}
+
+a{
+    text-align: left;
+    display: block;
+    color: #cccccc;
+}
+
+a:hover {
+    font-size: 16.5px;
+    cursor: pointer;
+    color: #cccccc;
+}
