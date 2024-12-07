@@ -1,11 +1,10 @@
-/* Tutaj wspólne (kolor tła, cały header + nav) */
 @font-face {
     font-family: "Lexend";
     src: url(Lexend-VariableFont_wght.ttf);
 }
 
 * {
-    font-family: lexend;
+    font-family: "lexend";
 }
 
 body {

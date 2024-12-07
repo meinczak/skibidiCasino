@@ -70,32 +70,32 @@
             <button onclick="start()" id="startBtn">PLAY</button>
         </div>
     </div>
+    <button id="playAgainBtn">Play Again</button>
     <div id="container" class="dark">
         <div class="dealersTable">
-            <div class="station">
-                <h1>Dealer</h1>
+            <div class="station" id="dealer">
                 <div class="cardTotal" id="dealersTotalDisplay">total</div>
                 <div class="statusDisplay" id="dealerStatus"></div>
                 <div class="cardDisplay" id="dealersCardsDisplay"></div>
             </div>
         </div>
+        <div class="logoContainer">
+            <div class="tableLogo">BLACK JACK</div>
+        </div>
         <div class="playersTable">
-            <div class="station" id="station1">
-                <h1>Station 1</h1>                
+            <div class="station" id="station1">             
                 <div class="cardTotal" id="station1Total">total 1</div>
                 <div class="statusDisplay" id="station1Status"></div>
                 <div class="cardDisplay" id="station1CardsDisplay"> </div>
                 <div class="betValue" id="station1BetDisplay"></div>
             </div>
             <div class="station" id="station2">
-                <h1>Station 2</h1>
                 <div class="cardTotal" id="station2Total">total 2</div>
                 <div class="statusDisplay" id="station2Status"></div>
                 <div class="cardDisplay" id="station2CardsDisplay"> </div>
                 <div class="betValue" id="station2BetDisplay">ALL-IN</div>
             </div>
             <div class="station" id="station3">
-                <h1>Station 3</h1>
                 <div class="cardTotal" id="station3Total">total 3</div>
                 <div class="statusDisplay" id="station3Status"></div>
                 <div class="cardDisplay" id="station3CardsDisplay"> </div>
@@ -103,10 +103,11 @@
             </div>
         </div>
         <div class="actionBar">
-            <div class="actionBtn" id="hitBtn" onclick="hit()">Hit</div>
-            <div class="actionBtn" id="splitBtn" onclick="split()">Split</div>
-            <div class="actionBtn" id="doubleBtn" onclick="double()">Double</div>
-            <div class="actionBtn" id="standBtn" onclick="stand()">Stand</div>
+            <div class="buttons">
+                <div class="actionBtn" id="hitBtn" onclick="hit()">Hit</div>
+                <div class="actionBtn" id="doubleBtn" onclick="double()">Double</div>
+                <div class="actionBtn" id="standBtn" onclick="stand()">Stand</div>
+            </div>
         </div>
     </div>
     <script src="blackJackScript.js"></script>
