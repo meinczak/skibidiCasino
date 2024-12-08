@@ -27,20 +27,19 @@
     }
 
     .actionBar {
-        height: 7.5vh;
+        height: 15vh;
         width: 100%;
         position: absolute;
         z-index: 1;
-        top: 35vh;
+        top: 10vh;
         display: flex;
-        justify-content: center;
+        justify-content:center;
     }
+
     .buttons {
-        width: 50%;
         display: flex;
-        justify-content: space-around;
-        align-items: center;
-        display: flex;
+        justify-content: space-between;
+        width: 65%;
     }
 
     .logoContainer {
@@ -57,6 +56,7 @@
         letter-spacing: 1vw;
         font-weight: 900;
         border-radius: 20px;
+        text-shadow: 0px 0px 15px rgb(123, 44, 191);
     }
 
     .station {
@@ -68,6 +68,7 @@
         border-radius: 20px;
         transition-duration: 0.2s;
         position: relative;
+        display: none;
     }
 
     .stationSelected {
@@ -80,7 +81,7 @@
         color: black;
         position: absolute;
         width: fit-content;
-        font-size: 50px;
+        font-size: 5vh;
         font-weight: 700;
         text-align: center;
         background-color: rgba(123, 44, 191, 0.9);
@@ -92,6 +93,7 @@
         left: 50%;
         transform: translate(-50%, -50%);
         white-space: nowrap;
+        box-shadow: 0px 0px 50px rgb(123, 44, 191);
     }
 
     .cardTotal {
@@ -126,9 +128,14 @@
         font-size:5vh;
         color: white;
         border-radius: 20px;
-        padding: 0vw 1vw 0vw 1vw;
         font-weight: 700;
         transition-duration: 0.2s;
+        z-index: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 12.5vw;
+        height: 6vh;
     }
 
     .actionBtn:hover {
@@ -256,15 +263,30 @@
 
     #dealer {
         height: 25vh;
-        padding-bottom: 1vh;
+        display: inline;
+        position: absolute;
+        z-index: 2;
     }
     #playAgainBtn {
         position: absolute;
         z-index: 1;
-        top: 53vh;
-        height: 5vh;
+        top: 42.5vh;
+        height: 7.6vh;
         width: 15vw;
         left: 42.5vw;
-        font-size: 3vh;
+        font-size: 5vh;
         white-space: nowrap;
+        color: white;
+        border-radius: 20px;
+        border: none;
+        display: none;
+    }
+
+    #hitBtn, #standBtn {
+        position: absolute;
+        bottom: 0;
+    }
+    #insuranceBtn {
+        font-size: 4vh;
+
     }

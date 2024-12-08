@@ -70,11 +70,11 @@
             <button onclick="start()" id="startBtn">PLAY</button>
         </div>
     </div>
-    <button id="playAgainBtn">Play Again</button>
-    <div id="container" class="dark">
+    <button id="playAgainBtn" class="actionBtn">Play Again</button>
+    <div id="container">
         <div class="dealersTable">
             <div class="station" id="dealer">
-                <div class="cardTotal" id="dealersTotalDisplay">total</div>
+                <div class="cardTotal" id="dealersTotalDisplay">DEALER</div>
                 <div class="statusDisplay" id="dealerStatus"></div>
                 <div class="cardDisplay" id="dealersCardsDisplay"></div>
             </div>
@@ -84,29 +84,34 @@
         </div>
         <div class="playersTable">
             <div class="station" id="station1">             
-                <div class="cardTotal" id="station1Total">total 1</div>
+                <div class="cardTotal" id="station1Total"></div>
                 <div class="statusDisplay" id="station1Status"></div>
                 <div class="cardDisplay" id="station1CardsDisplay"> </div>
                 <div class="betValue" id="station1BetDisplay"></div>
             </div>
             <div class="station" id="station2">
-                <div class="cardTotal" id="station2Total">total 2</div>
+                <div class="cardTotal" id="station2Total"></div>
                 <div class="statusDisplay" id="station2Status"></div>
                 <div class="cardDisplay" id="station2CardsDisplay"> </div>
-                <div class="betValue" id="station2BetDisplay">ALL-IN</div>
+                <div class="betValue" id="station2BetDisplay"></div>
             </div>
             <div class="station" id="station3">
-                <div class="cardTotal" id="station3Total">total 3</div>
+                <div class="cardTotal" id="station3Total"></div>
                 <div class="statusDisplay" id="station3Status"></div>
                 <div class="cardDisplay" id="station3CardsDisplay"> </div>
-                <div class="betValue" id="station3BetDisplay">ALL-IN</div>
+                <div class="betValue" id="station3BetDisplay"></div>
             </div>
         </div>
         <div class="actionBar">
             <div class="buttons">
-                <div class="actionBtn" id="hitBtn" onclick="hit()">Hit</div>
-                <div class="actionBtn" id="doubleBtn" onclick="double()">Double</div>
-                <div class="actionBtn" id="standBtn" onclick="stand()">Stand</div>
+                <div class="btnContainer">
+                    <div class="actionBtn" id="insuranceBtn" onclick="insurance()">Insurance</div>
+                    <div class="actionBtn" id="standBtn" onclick="stand()">Stand</div>
+                </div>
+                <div class="btnContainer">
+                    <div class="actionBtn" id="doubleBtn" onclick="double()">Double</div>
+                    <div class="actionBtn" id="hitBtn" onclick="hit()">Hit</div>
+                </div>
             </div>
         </div>
     </div>

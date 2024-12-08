@@ -47,6 +47,7 @@ const doubleBtn = document.getElementById("doubleBtn");
 const standBtn = document.getElementById("standBtn");
 const popUp = document.getElementById("popUp");
 const container = document.getElementById("container");
+const playAgainBtn = document.getElementById("playAgainBtn");
 
 let playedCards = [];
 let playersHandsValue;            
@@ -54,7 +55,6 @@ let playersAceCount;
 let dealersHandsValue;           
 let dealersAceCount;
 let hiddenCard;
-let isGameOn = false;
 let playingStations = [];
 let currentPlayingStation;
 
@@ -157,16 +157,19 @@ function start() {
 
     if (station1.betInput.value > 0 ) {
         playingStations.push(station1);
+        station1.stationId.style.display = "inline";
     } else {
         station1.stationId.style.display = "none";
     }
     if (station2.betInput.value > 0) {
         playingStations.push(station2);
+        station2.stationId.style.display = "inline";
     } else {
         station2.stationId.style.display = "none";
     }
     if (station3.betInput.value > 0) {
         playingStations.push(station3);
+        station3.stationId.style.display = "inline";
     } else {
         station3.stationId.style.display = "none";
     }
@@ -174,18 +177,35 @@ function start() {
     if (playingStations.length == 0) {
         alert("Input a bet first!");
         return;
-    } else {
-        isGameOn = true
     }
 
     popUp.style.display = "none";
-    container.style.filter = "brightness(1)"
+    container.style.filter = "brightness(1)";
+    playAgainBtn.style.display = "none";
 
     playedCards = [];
+    currentPlayingStation = 0;
     dealer.handValue = 0;
     dealer.aceCount = 0;
     dealersCardsDisplay.innerHTML = "";
     dealersTotalDisplay.innerHTML = "";
+    
+    if (playingStations.length === 1) {
+        playingStations[0].stationId.style.transform = "rotate(0turn)";
+        playingStations[0].stationId.style.marginBottom = "0vh";
+    } else if (playingStations.length === 2) {
+        playingStations[0].stationId.style.transform = "rotate(0.025turn)";
+        playingStations[0].stationId.style.marginBottom = "7.5vh";
+        playingStations[1].stationId.style.transform = "rotate(-0.025turn)";
+        playingStations[1].stationId.style.marginBottom = "7.5vh";
+    } else if (playingStations.length === 3) {
+        playingStations[0].stationId.style.transform = "rotate(0.05turn)";
+        playingStations[0].stationId.style.marginBottom = "15vh";
+        playingStations[1].stationId.style.transform = "rotate(0turn)";
+        playingStations[1].stationId.style.marginBottom = "0vh";
+        playingStations[2].stationId.style.transform = "rotate(-0.05turn)";
+        playingStations[2].stationId.style.marginBottom = "15vh";
+    }
 
     for (let i = 0; i < playingStations.length; i++) {
         playingStations[i].stationId.style.display = "initial";
@@ -209,16 +229,16 @@ function start() {
 
     draw("hidden");
 
-    currentPlayingStation = 0;
+    if (playingStations[0].handValue == 21) {
+        stand()
+    }
+
     playingStations[currentPlayingStation].stationId.classList.add("stationSelected");
 
     
 }
 
 function hit() {
-    if (!isGameOn) {
-        return;
-    }
     draw(playingStations[currentPlayingStation]);
 
     if (playingStations[currentPlayingStation].handValue > 21) {
@@ -253,14 +273,15 @@ function stand() {
 
         if (dealer.handValue > 21) {
             dealer.hasBusted = true;
+            dealerStatus.innerHTML = "Bust!";
         }
         
         for (let i = 0; i < playingStations.length; i++) {
             if (playingStations[i].hasBusted) {
-                playingStations[i].status.innerHTML = "BUST! You Lose!";
+                playingStations[i].status.innerHTML = "BUST! <br> You Lose!";
             } else if (playingStations[i].status.innerHTML == "Black Jack!" && dealerStatus.innerHTML != "Black Jack!") {
                 gameWinnings += playingStations[i].betValue * 2.5;
-                playingStations[i].status.innerHTML = "Black Jack! You Win!";
+                playingStations[i].status.innerHTML = "Black Jack! <br> You Win!";
             } else if (dealer.hasBusted) {
                 gameWinnings += playingStations[i].betValue * 2;
                 dealerStatus.innerHTML = "Bust!";
@@ -275,6 +296,7 @@ function stand() {
                 playingStations[i].status.innerHTML = "You Lose!";
             }
         }
+        playAgainBtn.style.display = "inline";
         console.log(gameWinnings);
 
     } else {
