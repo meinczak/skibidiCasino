@@ -14,7 +14,7 @@
 }
 
 .con{
-    background-color: #272727;
+    background-color: #1a1a1a;
     width: 50vw;
     height: 50vh;
     border-radius: 40px;
@@ -25,7 +25,6 @@
 input[type="number"]{
     width: 7vw;
     height: 10vh;
-    border: 0;
     outline: none;
     border-radius: 10px;
     padding: 0;
@@ -33,6 +32,10 @@ input[type="number"]{
     position: absolute;
     text-align: center;
     font-size: x-large;
+    border: 0;
+    background-color: rgb(36, 36, 36);
+    color: white;
+    transition: 0.3s;
 }
 
 input[type="button"]{
@@ -44,12 +47,23 @@ input[type="button"]{
     border-radius: 10px;
     font-size: x-large;
     text-align: center;
+    background-color: #0c0c0c;
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+input[type="button"]:hover, input[type="number"]:focus {
+    background-color: #141414;
 }
 
 #apply{
     width: 36.5vw;
     height: 7vh;
     margin-top: 1vh;
+    left: 0;
+    margin-left: 6.75vw;
+    position: absolute;
 }
 
 
@@ -57,4 +71,24 @@ input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+#error{
+    display: none;
+    color: red;
+    font-weight: 300;
+    margin: 5px 0 5px 15%;
+    position: absolute;
+    text-align: center;
+    width: 70%;
+
+}
+
+#kwota{
+    display: block;
+    position: absolute;
+    font-size: 1.5vw;
+    width: 70%;
+    margin-left: 15%;
+    margin-top: 10%
 }
