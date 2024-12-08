@@ -7,6 +7,8 @@
     <title>Balance</title>
     <link rel="icon" type="image/x-icon" href="../logo_smol1.png">
     <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="style2.css">
+    <script src="script.js"></script>
 </head>
 
 <body>
@@ -46,7 +48,19 @@
             </nav>
         </div>
     </header>
-
+        <div class="main">
+            <div class="con">
+                <form>
+                    <input type="number" id="numer" placeholder="Amount">
+                    <input type="button">
+                    <input type="button" value="10zł" id="dycha" onclick="kwota10()">
+                    <input type="button" value="50zł" id="psiat" onclick="kwota50()">
+                    <input type="button" value="100zł" id="stowka" onclick="kwota100()"> <!--mamy stowke-->
+                    <input type="button" value="500zł" id="pincstow" onclick="kwota500()"><br>
+                    <input type="button" id="apply" value="Go to payment">
+                </form>
+            </div>
+        </div>
        <footer>
         <div class="info"></div>
         <div class="info"></div>

@@ -54,7 +54,7 @@
                 <label id="lb1" for="email">Email:</label><br>
                 <input id="email" type="email" placeholder="example@domain.com"><br>
                 <label for="message">Message:</label><br>
-                <textarea id="message" type="textarea" maxlength="500" placeholder="Describe your problem" rows="1" cols="20" wrap="hard"></textarea><br>
+                <textarea id="message" type="textarea" maxlength="500" placeholder="Describe your problem (max 500 characters)" rows="1" cols="20" wrap="hard" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"'></textarea><br>
                 <label for="file">Attachment:</label><br>
                 <input id="file" type="file" multiple><br>
                 <input id="submit" type="submit" value="Submit">

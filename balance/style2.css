@@ -1,0 +1,60 @@
+.main{
+    background-color: #0c0c0c;
+    width: 60vw;
+    height: 60vh;
+    border-radius: 40px;
+    padding: 5vw 5vw 0 5vw;
+    margin-left: 15vw;
+    color: #cccccc;
+    font-size: 16px;
+    position: absolute;
+    margin-top: 20vh;
+    top:0;
+    text-align: center;
+}
+
+.con{
+    background-color: #272727;
+    width: 50vw;
+    height: 50vh;
+    border-radius: 40px;
+    position: absolute;
+    margin-left: 5vw;
+}
+
+input[type="number"]{
+    width: 7vw;
+    height: 10vh;
+    border: 0;
+    outline: none;
+    border-radius: 10px;
+    padding: 0;
+    margin: 5vh 0.1vw 0 0.1vw;
+    position: absolute;
+    text-align: center;
+    font-size: x-large;
+}
+
+input[type="button"]{
+    width: 7vw;
+    height: 10vh;
+    margin: 5vh 0.1vw 0 0.1vw;
+    padding: 10px;
+    border: 0;
+    border-radius: 10px;
+    font-size: x-large;
+    text-align: center;
+}
+
+#apply{
+    width: 36.5vw;
+    height: 7vh;
+    margin-top: 1vh;
+}
+
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}

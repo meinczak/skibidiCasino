@@ -1,25 +1,41 @@
 .main{
     background-color: #0c0c0c;
     width: 70vw;
-    height: 90vh;
+    height: 60vh;
     border-radius: 40px;
-    padding: 50px;
-    margin-left: 15vw;
+    padding: 3vh 5vw 4vh 5vw;
+    margin-left: 10vw;
     color: #cccccc;
     font-size: 16px;
     position: absolute;
     margin-top: 20vh;
     top:0;
+    overflow-y: scroll;
 }
 
-a{
+a.link{
     text-align: left;
     display: block;
     color: #cccccc;
 }
 
-a:hover {
+a.link:hover {
     font-size: 16.5px;
     cursor: pointer;
     color: #cccccc;
+}
+
+::-webkit-scrollbar {
+    width: 15px;
+    position: absolute;
+}
+::-webkit-scrollbar-track {
+    background: #0c0c0c;
+    border-radius: 10px;
+    margin: 120px;
+}
+::-webkit-scrollbar-thumb {
+    background: #1a1a1a;
+    border-radius: 10px;
+    cursor: pointer;
 }
