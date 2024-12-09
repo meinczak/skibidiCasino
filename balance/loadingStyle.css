@@ -1,0 +1,85 @@
+body{
+    background-color: #272727;
+}
+
+.roulette {
+    position: absolute;
+    z-index: 1;
+    margin-left: 42.5vw;
+    margin-top: 30vh;
+    width: 15vw;
+    aspect-ratio: 1;
+    background-image:
+        radial-gradient(closest-side, var(--backgroundColor) 44%, var(--rouletteColor) 45% 47%, transparent 48% 61%, var(--rouletteColor) 62% 64%, var(--backgroundColor) 65% 95%, var(--rouletteColor) 96% 97%, var(--backgroundColor) 100%),
+        repeating-conic-gradient(#0c0c0c 0deg 7deg, var(--rouletteColor) 8deg 9deg, rgba(123, 44, 191, 1) 10deg 17deg, var(--rouletteColor) 18deg 19deg, #0c0c0c 20deg);
+    animation: roulette 3s infinite linear;
+}
+
+@keyframes roulette {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+@keyframes rouletteCenter {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(-360deg);
+    }
+}
+
+
+@keyframes rouletteBall {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg) translateY(0%);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg) translateY(0%);
+    }
+}
+
+:root {
+    --backgroundColor: #272727;
+    --rouletteColor: #545454;
+}
+
+.roulette::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 30%;
+    aspect-ratio: 1;
+    background-image:
+        radial-gradient(var(--rouletteColor) 20%, transparent 21%),
+        linear-gradient(transparent 45%, var(--rouletteColor) 46% 54%, transparent 55%),
+        linear-gradient(90deg, transparent 45%, var(--rouletteColor) 46% 54%, transparent 55%);
+    animation: rouletteCenter 1s infinite linear;
+    animation-play-state: running;
+    transform: translate(-50%, -50%);
+}
+
+
+.roulette::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 10%;
+    width: 10%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: var(--rouletteColor);
+    transform-origin: 50% 450%;
+    animation: rouletteBall 2s infinite linear;
+    animation-play-state: running;
+    transform: translate(-50%, -50%);
+}

@@ -43,12 +43,13 @@
     background-color: #0c0c0c;
     margin-top: 20vh;
     padding: 20px;
-    max-width: 1400px;
+    max-width: 1800px;
     border-radius: 8px;
     position: absolute;
     top: 0;
     width: 70vw;
-    margin-left: 20vw;
+    margin-left: 15vw;
+    height: 70vh;
 }
 
 .lContainer, .RContainer {

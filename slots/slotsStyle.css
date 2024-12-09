@@ -1,0 +1,12 @@
+.main {
+    background-color: #0c0c0c;
+    height: 70vh;
+    width: 70vw;
+    margin-left: 15vw;
+    display: flex;
+    padding: 10px;
+    border-radius: 40px;
+    position: absolute;
+    margin-top: 20vh;
+    top:0;
+}
