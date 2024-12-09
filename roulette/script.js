@@ -1,6 +1,7 @@
 let totalchip = 0;
+
 let currentBets = []; // Tablica na różne zakłady
-let chips=[];
+let chips =  [];
 function chipTotal(value) {
     totalchip += value;
     document.getElementById("chipvalue").innerHTML = totalchip;
@@ -37,20 +38,22 @@ function table(grid) {
 
         // Dodaj zakład do listy
         currentBets.push({ type: betType, value: betValue });
-
+        
         if (totalchip > 0) {
             var chip = document.createElement("button");
+            
             chip.className = "chipontable";
             chip.innerHTML = `${totalchip}`;
             chip.setAttribute('data-number', totalchip);
             chip.setAttribute('data-grid', betValue)
+            chips.push({valueofBet: totalchip, grid: betValue})
             clickedCell.innerHTML = '';
             clickedCell.appendChild(chip);
-            chips.push({
-                number: totalchip,
-                grid: betValue
-            })
-            console.log(`utworzono chip o wartości ${chips.number}`)
+            console.log();
+         
+
+
+
         } else {
             alert("Najpierw dodaj żetony!");
         }
@@ -108,75 +111,79 @@ function table(grid) {
         let color;
         let bet;
         let r = rand(1, 1000);
-
+    
         // Losowanie koloru
         if (r < 30) color = "green";
         else if (r < 530) color = "red";
         else color = "black";
-
+    
         // Losowanie numeru w danym kolorze
         bet = bets[color][rand(0, bets[color].length)];
-
+    
         // Wywołanie animacji ruletki
         spin_promise(color, bet).then(() => {
-            let winBets = 0; // Liczba wygranych zakładów
-           
-            // Oblicz stawkę na jeden zakład
-           
-            let totalWin = totalchip;
+            let totalWin = 0; // Całkowita wygrana
+    
             // Sprawdzanie warunków wygranej dla każdego zakładu
             currentBets.forEach((currentBet) => {
                 let win = false;
+                let multiplier = 0;
+    
+                // Znajdź chip dla danego zakładu
+                const foundChip = chips.find(chip => chip.grid === currentBet.value);
+    
+                if (!foundChip) {
+                    console.log(`Brak chipa na polu ${currentBet.value}`);
+                    return;
+                }
+    
                 if (currentBet.type === "number" && currentBet.value == bet) {
                     win = true;
-                    totalWin = totalWin*22;
+                    multiplier = 2.2;
                 } else if (currentBet.type === "color" && currentBet.value === color) {
                     win = true;
-                    totalWin = totalWin*3;
-                } else if (currentBet.type === "parity" && 
-                           ((currentBet.value === "odd" && bet % 2 !== 0) || 
-                            (currentBet.value === "even" && bet % 2 === 0))) {
+                    multiplier = 1.2;
+                } else if (currentBet.type === "parity" &&
+                    ((currentBet.value === "odd" && bet % 2 !== 0) ||
+                     (currentBet.value === "even" && bet % 2 === 0))) {
                     win = true;
-                    totalWin = totalWin*2;
+                    multiplier = 1.5;
                 } else if (currentBet.type === "range") {
                     if ((currentBet.value === "1 to 7" && bet >= 1 && bet <= 7) ||
                         (currentBet.value === "8 to 14" && bet >= 8 && bet <= 14) ||
                         (currentBet.value === "15 to 21" && bet >= 15 && bet <= 21)) {
                         win = true;
-                        totalWin = totalWin*3;
+                        multiplier = 1.9;
                     }
                 }
-
-                // Jeśli wygrana, zliczamy ją
+    
                 if (win) {
-                    winBets++;
-            
+                    const chipWin = foundChip.valueofBet * multiplier;
+                    totalWin += chipWin;
+                    console.log(`Wygrana na polu ${currentBet.value}: ${chipWin}`);
                 }
             });
-
-            // Wygrana całkowita
-            
-
-            if (winBets > 0) {
-                alert(`Wygrałeś! Wygrana: ${totalWin}`);
-                resetChip();
-                resetTable();
+    
+            // Wyświetlenie wyników
+            if (totalWin > 0) {
+                alert(`Wygrałeś! Łączna wygrana: ${totalWin}`);
             } else {
                 alert("Przegrałeś!");
-                resetChip();
-                resetTable();
             }
-
+    
+            // Reset żetonów i stołu
+            resetChip();
+            resetTable();
+    
             // Reset zakładów
             currentBets = [];
-
-            // Odblokowanie przycisku po zakończeniu gry
+    
+            // Odblokowanie przycisków
             document.getElementById('placeBet').disabled = false;
             document.getElementById('resetchip').disabled = false;
             document.getElementById('resetbet').disabled = false;
         });
     }
-
     document.getElementById('placeBet').addEventListener('click', function() {
         if (currentBets.length === 0) {
             alert("Najpierw wybierz pole zakładu.");
