@@ -9,4 +9,24 @@
     position: absolute;
     margin-top: 20vh;
     top:0;
+    justify-content: space-around;
+}
+
+.container {
+    height: 100%;
+    width: 10%;
+    display: flex;
+    
+}
+.wrap {
+    display: flex;
+    width: 90px;
+     justify-content: space-around;
+    transition: background-position 5s;
+    transition-timing-function: easeOutQuint;
+    background-image: url("slots.png");
+    background-repeat: repeat-y;
+    
+    background-size: cover;
+    background-position: 0px;
 }
