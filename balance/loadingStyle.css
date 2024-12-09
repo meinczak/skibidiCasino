@@ -83,3 +83,14 @@ body{
     animation-play-state: running;
     transform: translate(-50%, -50%);
 }
+
+.loading{
+    width: 15vw;
+    height: 2vh;
+    color: #7b2cbf;
+    margin-left: 42.5vw;
+    margin-top: 70vh;
+    text-align: center;
+    position: absolute;
+    font-size: x-large;
+}
