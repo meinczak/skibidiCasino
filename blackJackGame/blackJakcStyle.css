@@ -288,5 +288,8 @@
     }
     #insuranceBtn {
         font-size: 4vh;
-
+    }
+    .btnContainer {
+        height: 15vh;
+        width: 12.5vw;
     }

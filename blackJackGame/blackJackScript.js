@@ -45,15 +45,12 @@ const dealerStatus = document.getElementById("dealerStatus");
 const hitBtn = document.getElementById("hitBtn");                                  
 const doubleBtn = document.getElementById("doubleBtn");
 const standBtn = document.getElementById("standBtn");
+const insuranceBtn = document.getElementById("insuranceBtn");
 const popUp = document.getElementById("popUp");
 const container = document.getElementById("container");
 const playAgainBtn = document.getElementById("playAgainBtn");
 
-let playedCards = [];
-let playersHandsValue;            
-let playersAceCount;
-let dealersHandsValue;           
-let dealersAceCount;
+let playedCards = [];                 
 let hiddenCard;
 let playingStations = [];
 let currentPlayingStation;
@@ -227,6 +224,11 @@ function start() {
         }
     }
 
+    insuranceBtn.style.display = "none";
+    if (dealer.handValue == 11) {
+        insuranceBtn.style.display = "flex";
+    }
+
     draw("hidden");
 
     if (playingStations[0].handValue == 21) {
@@ -234,6 +236,8 @@ function start() {
     }
 
     playingStations[currentPlayingStation].stationId.classList.add("stationSelected");
+
+    doubleBtn.style.display = "flex";
 
     
 }
@@ -248,12 +252,16 @@ function hit() {
     if (playingStations[currentPlayingStation].handValue >= 21) {       
         stand();
     }
-    
+    doubleBtn.style.display = "none";
 }
 
 function stand() {
     playingStations[currentPlayingStation].stationId.classList.remove("stationSelected");
     currentPlayingStation++
+    doubleBtn.style.display = "flex";
+    if (playingStations[currentPlayingStation].status.innerHTML == "Black Jack!") {
+        stand();
+    }
     if (currentPlayingStation + 1 > playingStations.length) {
 
         let gameWinnings = 0;
@@ -303,4 +311,16 @@ function stand() {
         playingStations[currentPlayingStation].stationId.classList.add("stationSelected");
     }
     
+}
+
+function double() {
+    if (playingStations[currentPlayingStation].betValue) {
+        playingStations[currentPlayingStation].betValue = playingStations[currentPlayingStation].betValue * 2;
+        draw(playingStations[currentPlayingStation]);
+        if (playingStations[currentPlayingStation].handValue > 21) {
+            playingStations[currentPlayingStation].status.innerHTML = "BUST!";
+            playingStations[currentPlayingStation].hasBusted = true;   
+        }
+        stand();
+    }
 }
