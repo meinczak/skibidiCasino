@@ -1,201 +1,184 @@
-
-
-/* Kontener ruletki */
 .roulette-container {
-    height: 80px;
-    width: 80%;
-    display: block;
+  height: 80px;
+  width: 80%;
+  display: block;
 }
 
 .roulette-container .wrap {
-    display: block;
-    width: 100%;
-    height: 100%;
-    transition: background-position 5s;
-    transition-timing-function: easeOutQuint;
-    background-image: url("roulette.png");
-    background-repeat: repeat-x;
-    min-width: 100%;
-    background-size: cover;
-    background-position: 0px;
+  display: block;
+  width: 100%;
+  height: 100%;
+  transition: background-position 5s;
+  transition-timing-function: easeOutQuint;
+  background-image: url("roulette.png");
+  background-repeat: repeat-x;
+  min-width: 100%;
+  background-size: cover;
+  background-position: 0px;
 }
 
 .roulette-container .wrap .controller {
-    display: block;
-    width: 5px;
-    background-color: #fff;
-    height: 100%;
-    margin: 0 auto;
+  display: block;
+  width: 5px;
+  background-color: #fff;
+  height: 100%;
+  margin: 0 auto;
 }
 
 .wrap {
-    box-shadow: inset 1px 1px 20px 10px #0c0c0c;
-    border-radius: 10px;
-    border-inline: solid 2px #0c0c0c;
+  box-shadow: inset 1px 1px 20px 10px #0c0c0c;
+  border-radius: 10px;
+  border-inline: solid 2px #0c0c0c;
 }
 
-
-/* Layout główny */
 .main {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    background-color: #0c0c0c;
-    margin-top: 20vh;
-    padding: 20px;
-    position: absolute;
-    border-radius: 8px;
-    top: 0%;
-    left: 2%;
-    width: 94vw;
-    height: 70vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background-color: #0c0c0c;
+  margin-top: 20vh;
+  padding: 20px;
+  position: absolute;
+  border-radius: 8px;
+  top: 0%;
+  left: 2%;
+  width: 94vw;
+  height: 70vh;
 }
 
-.lContainer, .RContainer {
-    padding-top: 50px;
-    padding: 20px;
-    margin: 10px;
-    height: 30vw;
+.lContainer,
+.RContainer {
+  padding: 20px;
+  margin: 10px;
+  height: 30vw;
 }
 
 .lContainer {
-    flex: 40%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    background-color: #1a1a1a;
-    border-radius: 8px;
-    
-    position: relative;
+  flex: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+
+  position: relative;
 }
 
 .RContainer {
-    display: flex;
-    flex: 60%;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: #1a1a1a;
-    border-radius: 8px;
-    position: relative;
+  display: flex;
+  flex: 60%;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #1a1a1a;
+  border-radius: 8px;
+  position: relative;
 }
 
-/* Kontener ruletki */
 .roulette {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: 100%;
-    justify-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex: 100%;
+  justify-items: center;
 }
 
-/* Tabela */
 table {
-    border-collapse: collapse;
+  border-collapse: collapse;
 }
 
-/* Style przycisków */
 button {
-    background-color: #1a1a1a;
-    border: none;
-    text-align: center;
-    margin-left: 10px;
-    font-size:15px ;
-    color: white;
-    outline: none;
-    cursor: pointer;
-    background-repeat: no-repeat;
-    border-radius: 10px;
-    padding: 10px;
-   
-    transition-duration: 1s;
+  background-color: #1a1a1a;
+  border: none;
+  text-align: center;
+  margin-left: 10px;
+  font-size: 15px;
+  color: white;
+  outline: none;
+  cursor: pointer;
+  background-repeat: no-repeat;
+  border-radius: 10px;
+  padding: 10px;
+  transition-duration: 1s;
 }
-button:hover{
-    background-color: rgba(123, 44, 191, 1);
-
-
+button:hover {
+  background-color: rgba(123, 44, 191, 1);
 }
 
-/* Kontener z żetonami */
 .container_chip {
-    text-align: center;
-    height: 300px;
-    background-color: #272727;
-    border-radius: 10px;
+  text-align: center;
+  height: 300px;
+  background-color: #272727;
+  border-radius: 10px;
 }
 .chip_container {
-    width: 450px;
-    display: flex;
-    justify-content: space-around;
-    align-items: start; 
+  width: 450px;
+  display: flex;
+  justify-content: space-around;
+  align-items: start;
 }
 
-/* Style żetonów */
-.chip, .chipvalue {
-    position: relative;
-    display: block;
-    margin: 30px auto;
-    width: 75px;
-    height: 75px;
-    border: 13px dashed rgb(203, 203, 203);
-    border-radius: 50%;
-    background-color: rgb(123, 44, 191);
-    box-shadow: 0 0 15px 5px #0c0c0c, inset 0 0 5px 2px #0c0c0c; 
-    text-align: center;
-    transition: transform 0.3s ease;  
-    color: white;
+.chip,
+.chipvalue {
+  position: relative;
+  display: block;
+  margin: 30px auto;
+  width: 75px;
+  height: 75px;
+  border: 13px dashed rgb(203, 203, 203);
+  border-radius: 50%;
+  background-color: rgb(123, 44, 191);
+  box-shadow: 0 0 15px 5px #0c0c0c, inset 0 0 5px 2px #0c0c0c;
+  text-align: center;
+  transition: transform 0.3s ease;
+  color: white;
 }
 
 .chipontable {
-    position: absolute; 
-    top: 50%; 
-    left: 50%; 
-    transform: translate(-50%, -50%); 
-    width: 50px;
-    height: 50px;
-    margin: 0; 
-    font-size: 10px;
-    border: 9px dashed rgb(203, 203, 203);
-    border-radius: 50%;
-    background-color: rgb(123, 44, 191);
-    box-shadow: 0 0 15px 5px #0c0c0c, inset 0 0 5px 2px #0c0c0c; 
-    transition: transform 0.3s ease;  
-    color: white;
-    display: flex; 
-    justify-content: center;
-    align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50px;
+  height: 50px;
+  margin: 0;
+  font-size: 10px;
+  border: 9px dashed rgb(203, 203, 203);
+  border-radius: 50%;
+  background-color: rgb(123, 44, 191);
+  box-shadow: 0 0 15px 5px #0c0c0c, inset 0 0 5px 2px #0c0c0c;
+  transition: transform 0.3s ease;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .chip:hover {
-    transform: translateY(-10px);
+  transform: translateY(-10px);
 }
 
-/* Style tabeli */
 td {
-    vertical-align: middle !important; 
-    border-collapse: collapse;
-    border: white solid 2px;
-    padding: 20px; 
-    color: white;
-    width: 50px;
-    height: 50px;
-    text-align: center; 
-    position: relative; 
+  vertical-align: middle !important;
+  border-collapse: collapse;
+  border: white solid 2px;
+  padding: 20px;
+  color: white;
+  width: 12vw;
+  height: 6vh;
+  text-align: center;
+  position: relative;
 }
 
 .black {
-    background-color: #0c0c0c;
+  background-color: #0c0c0c;
 }
 
 .red {
-    background-color: rgb(123, 44, 191);
+  background-color: rgb(123, 44, 191);
 }
 
 .green {
-    background-color: #c77dff;
-}
-
-.empty {
-    border: none;
+  background-color: #c77dff;
 }

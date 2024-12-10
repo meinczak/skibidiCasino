@@ -16,17 +16,21 @@
     height: 100%;
     width: 10%;
     display: flex;
-    
 }
+
 .wrap {
     display: flex;
     width: 90px;
-     justify-content: space-around;
-    transition: background-position 5s;
-    transition-timing-function: easeOutQuint;
+    justify-content: space-around;
     background-image: url("slots.png");
     background-repeat: repeat-y;
-    
     background-size: cover;
     background-position: 0px;
+    transition: background-position 3s ease-out;
+    will-change: background-position;
+}
+
+@keyframes spin {
+    0% { background-position: 0px; }
+    100% { background-position: 1000px; }
 }
