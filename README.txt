@@ -8,4 +8,4 @@ https://www.svgrepo.com/collection/variety-flat-bordered-icons/28
 
 PODGLAD STRONY
 
-https://xrookless.github.io/projektNaChwirota/
+https://meinczak.github.io/skibidiCasino/
