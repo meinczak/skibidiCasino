@@ -3,7 +3,7 @@
     width: 60vw;
     height: 60vh;
     border-radius: 40px;
-    padding: 3vh 5vw 4vh 5vw;
+    padding: 2vw 5vw 2vw 5vw;
     margin-left: 15vw;
     color: #cccccc;
     font-size: 16px;
@@ -38,4 +38,10 @@ a.link:hover {
     background: #1a1a1a;
     border-radius: 10px;
     cursor: pointer;
+}
+
+h1{
+    font-size: 2vw;
+    margin: 0 0 3vh 0;
+    text-align: center;
 }
