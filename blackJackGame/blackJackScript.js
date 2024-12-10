@@ -54,6 +54,7 @@ let playedCards = [];
 let hiddenCard;
 let playingStations = [];
 let currentPlayingStation;
+let currentCardId = 1;
 
 let dealer = {handValue: 0, aceCount: 0, hasBusted: false};
 class Station {
@@ -79,6 +80,7 @@ let station3 = new Station(0, 0, 0, false, document.getElementById("input3"), do
 function draw(target) {
 
     let hasDrawn = false;
+   
 
     while (!hasDrawn) {
 
@@ -86,12 +88,18 @@ function draw(target) {
 
         if (!playedCards.includes(drawnCard)) {
 
-            let cardVisual = `<img src="deck/${deck[drawnCard].cardValue}${deck[drawnCard].suit}.png">`
+            let cardVisual = `
+            <div class="card" id="${currentCardId}">
+                <img class="card-front" src="deck/${deck[drawnCard].cardValue}${deck[drawnCard].suit}.png">
+                <img class="card-back" src='deck/reverse.png'>
+            </div>
+            `
             playedCards.push(drawnCard);
 
             if (target == "dealer") {
                 dealersCardsDisplay.innerHTML += cardVisual;
-
+                document.getElementById(currentCardId).style.animation = "cardBoth 0.75s ease-in-out";
+                document.getElementById(currentCardId).style.transform = "rotateY(180deg)";
                     if (deck[drawnCard].cardValue === "A") {
                         dealer.aceCount++;
                         dealer.handValue += 11;
@@ -109,7 +117,9 @@ function draw(target) {
                     dealersTotalDisplay.innerHTML = dealer.handValue;
             } else if (target == "hidden") {
                 hiddenCard = drawnCard;
-                dealersCardsDisplay.innerHTML += "<img id='hiddenCardDisplay' src='deck/reverse.png'>";
+                dealersCardsDisplay.innerHTML += 
+                `<div class="card" id="${currentCardId}"><img class="card-front" id="hiddenCardDisplay" src=""><img class="card-back" src="deck/reverse.png"></div>`;
+                document.getElementById(currentCardId).style.animation = "cardDrawing 0.375s ease-in-out";
                 if (deck[drawnCard].cardValue === "A") {
                     dealer.aceCount++;
                     dealer.handValue += 11;
@@ -125,6 +135,14 @@ function draw(target) {
                 }
             } else {
                 target.cardsDisplay.innerHTML += cardVisual;
+                document.getElementById(currentCardId).style.animation = "cardBoth 0.75s ease-in-out";
+                document.getElementById(currentCardId).style.transform = "rotateY(180deg)";
+                console.log(currentCardId);
+                document.getElementById(currentCardId).addEventListener("animationend", function (currentCardId) {
+                    document.getElementById(currentCardId).style.animation = "none";
+                    console.log("balls");
+                });
+
 
                 if (deck[drawnCard].cardValue === "A") {
                     target.aceCount++;
@@ -142,7 +160,7 @@ function draw(target) {
 
                 target.totalDisplay.innerHTML = target.handValue;
             }
-            
+            currentCardId++;
             hasDrawn = true;
         }
     }
@@ -151,6 +169,7 @@ function draw(target) {
 function start() {
 
     playingStations = [];
+    currentCardId = 0;
 
     if (station1.betInput.value > 0 ) {
         playingStations.push(station1);
@@ -231,11 +250,11 @@ function start() {
 
     draw("hidden");
 
+    playingStations[currentPlayingStation].stationId.classList.add("stationSelected");
+
     if (playingStations[0].handValue == 21) {
         stand()
     }
-
-    playingStations[currentPlayingStation].stationId.classList.add("stationSelected");
 
     doubleBtn.style.display = "flex";
 
@@ -257,11 +276,12 @@ function hit() {
 
 function stand() {
     playingStations[currentPlayingStation].stationId.classList.remove("stationSelected");
-    currentPlayingStation++
-    doubleBtn.style.display = "flex";
-    if (playingStations[currentPlayingStation].status.innerHTML == "Black Jack!") {
+    if (playingStations[currentPlayingStation].status.innerHTML + 1 == "Black Jack!") {
         stand();
     }
+    currentPlayingStation++
+    doubleBtn.style.display = "flex";
+
     if (currentPlayingStation + 1 > playingStations.length) {
 
         let gameWinnings = 0;
@@ -305,7 +325,6 @@ function stand() {
             }
         }
         playAgainBtn.style.display = "inline";
-        console.log(gameWinnings);
 
     } else {
         playingStations[currentPlayingStation].stationId.classList.add("stationSelected");
