@@ -11,7 +11,7 @@ body{
     aspect-ratio: 1;
     background-image:
         radial-gradient(closest-side, var(--backgroundColor) 44%, var(--rouletteColor) 45% 47%, transparent 48% 61%, var(--rouletteColor) 62% 64%, var(--backgroundColor) 65% 95%, var(--rouletteColor) 96% 97%, var(--backgroundColor) 100%),
-        repeating-conic-gradient(#0c0c0c 0deg 7deg, var(--rouletteColor) 8deg 9deg, rgba(123, 44, 191, 1) 10deg 17deg, var(--rouletteColor) 18deg 19deg, #0c0c0c 20deg);
+        repeating-conic-gradient(#0c0c0c 0deg 7deg, var(--rouletteColor) 8deg 9deg, #7b2cbf 10deg 17deg, var(--rouletteColor) 18deg 19deg, #0c0c0c 20deg);
     animation: roulette 3s infinite linear;
 }
 

@@ -1,0 +1,55 @@
+.main{
+    background-color: #0c0c0c;
+    width: 60vw;
+    height: 60vh;
+    border-radius: 40px;
+    padding: 2vw 5vw 2vw 5vw;
+    margin-left: 15vw;
+    color: #cccccc;
+    font-size: 16px;
+    position: absolute;
+    margin-top: 20vh;
+    top:0;
+    text-align: center;
+}
+
+h1{
+    font-size: 2vw;
+    margin: 0;
+}
+h2{
+    font-size: 1vw;
+}
+
+#podmiana{
+    display: none;
+}
+
+#nick {
+    display: inline-block;
+    width: auto;
+    height: 30px;
+    text-align: left;
+    margin: 20px;
+}
+
+#change, #save{
+    display: inline-block;
+    height: 30px;
+    background-color: rgb(36, 36, 36);
+    color: #CCCCCC;
+    padding: 0 10px 0 10px;
+    border: 0;
+    border-radius: 10px;
+}
+
+#pole{
+    width: 13vw;
+    margin-right: 5px;
+    background-color: rgb(36, 36, 36);
+    border: 0;
+    border-radius: 10px;
+    height: 30px;
+    color: #CCCCCC;
+    padding-left: 10px;
+}

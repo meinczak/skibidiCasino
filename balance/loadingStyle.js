@@ -24,4 +24,4 @@ function kropki(){
 
 }
 
-setInterval(kropki, 1000);
+setInterval(kropki, 500);
