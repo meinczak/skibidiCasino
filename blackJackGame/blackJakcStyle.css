@@ -111,6 +111,7 @@
         width: auto;
         position: relative;
         max-width: 30vw;
+        perspective: 1000px;
     }
 
     .betValue {
@@ -150,16 +151,51 @@
         user-select: none;
     }
 
+    @keyframes cardRotation {
+        0% {transform: rotateY(0deg);}
+        100% {transform: rotateY(180deg);}
+    }
 
-    img {
+    @keyframes cardDrawing {
+        0% {transform: translate(0, -100vh);}
+        100% {transform: translate(0, 0);}
+    }
+
+    @keyframes cardBoth {
+        0% {transform: translate(0, -100vh);}
+        50% {transform: translate(0, 0);transform: rotateY(0deg);}
+        100% {transform: rotateY(180deg);}
+    }
+
+    .card {
         width: 5vw;
+        height: calc(5vw * 1.4);
         border-radius: 10px;
         transition-duration: 0.2s;
         margin: 5px;
         border: 1px solid black;
+        transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+        position: relative;
+        animation: none;
+    }
+    .card-front,.card-back {
+        width: 100%;
+        height: 100%;
+        backface-visibility: hidden;
+        -webkit-backface-visibility: hidden;
+        border-radius: 10px;  
+        position: absolute; 
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .card-front {
+        transform: rotateY(180deg);
     }
 
-    img:hover {
+    .card:hover {
         scale: 1.5;
         z-index: 2;
     }
