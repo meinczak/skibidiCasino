@@ -70,13 +70,19 @@
             <button onclick="start()" id="startBtn">PLAY</button>
         </div>
     </div>
-    <button id="playAgainBtn" class="actionBtn">Play Again</button>
+    <button id="playAgainBtn" class="actionBtn" onclick="window.location.reload()">Play Again</button>
     <div id="container">
         <div class="dealersTable">
             <div class="station" id="dealer">
                 <div class="cardTotal" id="dealersTotalDisplay">DEALER</div>
                 <div class="statusDisplay" id="dealerStatus"></div>
-                <div class="cardDisplay" id="dealersCardsDisplay"></div>
+                <div class="cardDisplay" id="dealersCardsDisplay">
+                    <div id="dealerCard1"></div>
+                    <div id="dealerCard2"></div>
+                    <div id="dealerCard3"></div>
+                    <div id="dealerCard4"></div>
+                    <div id="dealerCard5"></div>
+                </div>
             </div>
         </div>
         <div class="logoContainer">
@@ -86,19 +92,37 @@
             <div class="station" id="station1">             
                 <div class="cardTotal" id="station1Total"></div>
                 <div class="statusDisplay" id="station1Status"></div>
-                <div class="cardDisplay" id="station1CardsDisplay"> </div>
+                <div class="cardDisplay" id="station1CardsDisplay"> 
+                    <div id="station1id1"></div>
+                    <div id="station1id2"></div>
+                    <div id="station1id3"></div>
+                    <div id="station1id4"></div>
+                    <div id="station1id5"></div>
+                </div>
                 <div class="betValue" id="station1BetDisplay"></div>
             </div>
             <div class="station" id="station2">
                 <div class="cardTotal" id="station2Total"></div>
                 <div class="statusDisplay" id="station2Status"></div>
-                <div class="cardDisplay" id="station2CardsDisplay"> </div>
+                <div class="cardDisplay" id="station2CardsDisplay"> 
+                    <div id="station2id1"></div>
+                    <div id="station2id2"></div>
+                    <div id="station2id3"></div>
+                    <div id="station2id4"></div>
+                    <div id="station2id5"></div>
+                </div>
                 <div class="betValue" id="station2BetDisplay"></div>
             </div>
             <div class="station" id="station3">
                 <div class="cardTotal" id="station3Total"></div>
                 <div class="statusDisplay" id="station3Status"></div>
-                <div class="cardDisplay" id="station3CardsDisplay"> </div>
+                <div class="cardDisplay" id="station3CardsDisplay">
+                    <div id="station3id1"></div>
+                    <div id="station3id2"></div>
+                    <div id="station3id3"></div>
+                    <div id="station3id4"></div>
+                    <div id="station3id5"></div>
+                </div>
                 <div class="betValue" id="station3BetDisplay"></div>
             </div>
         </div>

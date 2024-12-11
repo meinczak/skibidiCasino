@@ -40,7 +40,6 @@ const deck = [
     { cardValue: "K", suit: "S" }, { cardValue: "K", suit: "H" }, { cardValue: "K", suit: "D" }, { cardValue: "K", suit: "C" }
 ];
 const dealersTotalDisplay = document.getElementById("dealersTotalDisplay");         
-const dealersCardsDisplay = document.getElementById("dealersCardsDisplay");
 const dealerStatus = document.getElementById("dealerStatus");
 const hitBtn = document.getElementById("hitBtn");                                  
 const doubleBtn = document.getElementById("doubleBtn");
@@ -54,28 +53,27 @@ let playedCards = [];
 let hiddenCard;
 let playingStations = [];
 let currentPlayingStation;
-let currentCardId = 1;
 
-let dealer = {handValue: 0, aceCount: 0, hasBusted: false};
+let dealer = {handValue: 0, aceCount: 0, handLength: 0, hasBusted: false, cardsId: ["dealerCard1", "dealerCard2", "dealerCard3", "dealerCard4", "dealerCard5"]};
 class Station {
-    constructor(handValue, aceCount, betValue, hasBusted, betInput, cardsDisplay, totalDisplay, betDisplay, status, stationId) {
+    constructor(handValue, aceCount, betValue, handLength, hasBusted, betInput, totalDisplay, betDisplay, status, stationId, cardsId) {
         this.handValue = handValue;
         this.aceCount = aceCount;
         this.betValue = betValue;
+        this.handLength = handLength;
         this.hasBusted = hasBusted;
         this.betInput = betInput;
-        this.cardsDisplay = cardsDisplay;
         this.totalDisplay = totalDisplay;
         this.betDisplay = betDisplay;
         this.status = status;
         this.stationId = stationId;
+        this.cardsId = cardsId;
     }
 }
 
-let station1 = new Station(0, 0, 0, false, document.getElementById("input1"), document.getElementById("station1CardsDisplay"), document.getElementById("station1Total"), document.getElementById("station1BetDisplay"), document.getElementById("station1Status"), document.getElementById("station1"));
-let station2 = new Station(0, 0, 0, false, document.getElementById("input2"), document.getElementById("station2CardsDisplay"), document.getElementById("station2Total"), document.getElementById("station2BetDisplay"), document.getElementById("station2Status"), document.getElementById("station2"));
-let station3 = new Station(0, 0, 0, false, document.getElementById("input3"), document.getElementById("station3CardsDisplay"), document.getElementById("station3Total"), document.getElementById("station3BetDisplay"), document.getElementById("station3Status"), document.getElementById("station3"));
-
+let station1 = new Station(0, 0, 0, 0, false, document.getElementById("input1"), document.getElementById("station1Total"), document.getElementById("station1BetDisplay"), document.getElementById("station1Status"), document.getElementById("station1"), ["station1id1", "station1id2", "station1id3", "station1id4", "station1id5"]);
+let station2 = new Station(0, 0, 0, 0, false, document.getElementById("input2"), document.getElementById("station2Total"), document.getElementById("station2BetDisplay"), document.getElementById("station2Status"), document.getElementById("station2"), ["station2id1", "station2id2", "station2id3", "station2id4", "station2id5"]);
+let station3 = new Station(0, 0, 0, 0, false, document.getElementById("input3"), document.getElementById("station3Total"), document.getElementById("station3BetDisplay"), document.getElementById("station3Status"), document.getElementById("station3"), ["station3id1", "station3id2", "station3id3", "station3id4", "station3id5"]);
 
 function draw(target) {
 
@@ -89,7 +87,7 @@ function draw(target) {
         if (!playedCards.includes(drawnCard)) {
 
             let cardVisual = `
-            <div class="card" id="${currentCardId}">
+            <div class="card">
                 <img class="card-front" src="deck/${deck[drawnCard].cardValue}${deck[drawnCard].suit}.png">
                 <img class="card-back" src='deck/reverse.png'>
             </div>
@@ -97,9 +95,9 @@ function draw(target) {
             playedCards.push(drawnCard);
 
             if (target == "dealer") {
-                dealersCardsDisplay.innerHTML += cardVisual;
-                document.getElementById(currentCardId).style.animation = "cardBoth 0.75s ease-in-out";
-                document.getElementById(currentCardId).style.transform = "rotateY(180deg)";
+                document.getElementById(dealer.cardsId[dealer.handLength]).innerHTML = cardVisual; 
+                dealer.handLength++;
+                
                     if (deck[drawnCard].cardValue === "A") {
                         dealer.aceCount++;
                         dealer.handValue += 11;
@@ -117,9 +115,8 @@ function draw(target) {
                     dealersTotalDisplay.innerHTML = dealer.handValue;
             } else if (target == "hidden") {
                 hiddenCard = drawnCard;
-                dealersCardsDisplay.innerHTML += 
-                `<div class="card" id="${currentCardId}"><img class="card-front" id="hiddenCardDisplay" src=""><img class="card-back" src="deck/reverse.png"></div>`;
-                document.getElementById(currentCardId).style.animation = "cardDrawing 0.375s ease-in-out";
+                document.getElementById(dealer.cardsId[dealer.handLength]).style.animation = "cardDrawing 0.375s";
+                document.getElementById(dealer.cardsId[dealer.handLength]).innerHTML = `<div class="hiddenCard"><img class="card-front" id="hiddenCardDisplay" src=""><img class="card-back" src="deck/reverse.png"></div>`;
                 if (deck[drawnCard].cardValue === "A") {
                     dealer.aceCount++;
                     dealer.handValue += 11;
@@ -134,15 +131,8 @@ function draw(target) {
                     dealer.aceCount--;
                 }
             } else {
-                target.cardsDisplay.innerHTML += cardVisual;
-                document.getElementById(currentCardId).style.animation = "cardBoth 0.75s ease-in-out";
-                document.getElementById(currentCardId).style.transform = "rotateY(180deg)";
-                console.log(currentCardId);
-                document.getElementById(currentCardId).addEventListener("animationend", function (currentCardId) {
-                    document.getElementById(currentCardId).style.animation = "none";
-                    console.log("balls");
-                });
-
+                document.getElementById(target.cardsId[target.handLength]).innerHTML = cardVisual; 
+                target.handLength++;
 
                 if (deck[drawnCard].cardValue === "A") {
                     target.aceCount++;
@@ -160,7 +150,6 @@ function draw(target) {
 
                 target.totalDisplay.innerHTML = target.handValue;
             }
-            currentCardId++;
             hasDrawn = true;
         }
     }
@@ -169,7 +158,6 @@ function draw(target) {
 function start() {
 
     playingStations = [];
-    currentCardId = 0;
 
     if (station1.betInput.value > 0 ) {
         playingStations.push(station1);
@@ -203,7 +191,7 @@ function start() {
     currentPlayingStation = 0;
     dealer.handValue = 0;
     dealer.aceCount = 0;
-    dealersCardsDisplay.innerHTML = "";
+    dealer.handLength = 0;
     dealersTotalDisplay.innerHTML = "";
     
     if (playingStations.length === 1) {
@@ -229,8 +217,11 @@ function start() {
         playingStations[i].betDisplay.innerHTML = playingStations[i].betValue + "$";
         playingStations[i].handValue = 0;
         playingStations[i].aceCount = 0;
-        playingStations[i].cardsDisplay.innerHTML = "";
         playingStations[i].hasBusted = false;
+        playingStations[i].handLength = 0;
+        for (let o = 0; o < playingStations[i].cardsId.length; o++) {
+            playingStations[i].cardsId[o].innerHTML = "";
+        }
         draw(playingStations[i]);
     }
 
@@ -287,15 +278,18 @@ function stand() {
         let gameWinnings = 0;
 
         isGameOn = false;
-
+        document.getElementById(dealer.cardsId[1]).style.animation = "none";
+        document.getElementById(dealer.cardsId[1]).style.animation = "cardRotation 0.375s";
+        document.getElementById(dealer.cardsId[1]).style.transform = "rotateY('180deg')";
         document.getElementById("hiddenCardDisplay").src = `deck/${deck[hiddenCard].cardValue}${deck[hiddenCard].suit}.png`;
+
         dealersTotalDisplay.innerHTML = dealer.handValue;
         
         if (dealer.handValue == 21) {
             dealerStatus.innerHTML = "Black Jack!";
         }
         
-        while (dealer.handValue < 17) {
+        while (dealer.handValue < 17 && dealer.handLength < 5) {
             draw("dealer");
         }
 
