@@ -1,0 +1,38 @@
+.main{
+    background-color: #0c0c0c;
+    width: 60vw;
+    height: 60vh;
+    border-radius: 40px;
+    padding: 2vw 5vw 2vw 5vw;
+    margin-left: 15vw;
+    color: #cccccc;
+    font-size: 16px;
+    position: absolute;
+    margin-top: 20vh;
+    top:0;
+    text-align: center;
+}
+
+h1{
+    font-size: 2vw;
+    margin: 0;
+}
+
+input[type="button"]{
+    width: 30vw;
+    height: 10vh;
+    margin: 15vh 0.1vw 0 0.1vw;
+    padding: 10px;
+    border: 0;
+    border-radius: 10px;
+    font-size: x-large;
+    text-align: center;
+    background-color: #1a1a1a;
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+input[type="button"]:hover{
+    background-color: #303030;
+}
