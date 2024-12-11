@@ -177,7 +177,19 @@
         transform-style: preserve-3d;
         -webkit-transform-style: preserve-3d;
         position: relative;
-        animation: none;
+        transform: rotateY(180deg);
+        animation: cardBoth 0.75s ease-in-out;
+    }
+    .hiddenCard {
+        width: 5vw;
+        height: calc(5vw * 1.4);
+        border-radius: 10px;
+        transition-duration: 0.2s;
+        margin: 5px;
+        border: 1px solid black;
+        transform-style: preserve-3d;
+        -webkit-transform-style: preserve-3d;
+        position: relative;
     }
     .card-front,.card-back {
         width: 100%;
@@ -197,7 +209,7 @@
 
     .card:hover {
         scale: 1.5;
-        z-index: 2;
+        z-index: 1;
     }
 
     #popUp {
