@@ -5,6 +5,10 @@ body, html {
     justify-content: center;
     
 }
+.spins{
+  font-size: 30px;
+  color: white;
+}
 .main {
     display: flex;
     flex-direction: column; /* Ustawienie elementów w kolumnie */
