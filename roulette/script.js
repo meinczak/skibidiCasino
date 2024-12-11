@@ -14,7 +14,7 @@ function resetTable() {
   document.querySelectorAll(".chipontable").forEach((el) => el.remove());
   currentBets = [];
   document.querySelectorAll("#betType td").forEach((cell) => {
-    cell.innerHTML = cell.dataset.value;
+    cell.innerHTML = cell.dataset.in;
   });
 }
 function table(grid) {
@@ -57,13 +57,13 @@ document.addEventListener("contextmenu", (event) => {
 
     const chip = event.target;
     const parentCell = chip.parentElement;
-
-    const originalValue = parentCell.getAttribute("data-value");
+    const originalValuev = parentCell.getAttribute("data-value")
+    const originalValue = parentCell.getAttribute("data-in");
     parentCell.innerHTML = originalValue;
 
     chips = chips.filter((c) => c.grid !== originalValue);
 
-    currentBets = currentBets.filter((bet) => bet.value !== originalValue);
+    currentBets = currentBets.filter((bet) => bet.value !== originalValuev);
 
     console.log(`Chip na polu ${originalValue} został usunięty.`);
   }
@@ -227,6 +227,7 @@ document.addEventListener("contextmenu", (event) => {
       }
 
       document.getElementById("placeBet").disabled = true;
+  
       document.getElementById("resetchip").disabled = true;
       document.getElementById("resetbet").disabled = true;
 
