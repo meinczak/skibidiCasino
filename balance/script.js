@@ -56,3 +56,19 @@ function pay(){
     location.href = "loading.html";
 
 }
+
+function balance(){
+  var liczba = document.getElementById("numer").value;
+  document.cookie = `balance=${liczba}; path=/; domain=127.0.0.1`;
+
+  function ciasteczko(nazwa) {
+    var ciasteczka = document.cookie.split('; ');
+    for (var i = 0; i < ciasteczka.length; i++) {
+        var [ciastko, wartosc] = ciasteczka[i].split('=');
+        if (ciastko === nazwa) {
+            return decodeURIComponent(wartosc);
+        }
+    }
+    return null;
+}
+   }

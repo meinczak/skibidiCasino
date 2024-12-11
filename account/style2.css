@@ -21,7 +21,7 @@ h2{
     font-size: 1vw;
 }
 
-#podmiana{
+#podmiana, #podmiana1{
     display: none;
 }
 
@@ -43,7 +43,7 @@ h2{
     border-radius: 10px;
 }
 
-#pole{
+#pole, #pole1{
     width: 13vw;
     margin-right: 5px;
     background-color: rgb(36, 36, 36);
@@ -52,4 +52,12 @@ h2{
     height: 30px;
     color: #CCCCCC;
     padding-left: 10px;
+}
+
+#mail {
+    display: inline-block;
+    width: auto;
+    height: 30px;
+    text-align: left;
+    margin: 20px;
 }
