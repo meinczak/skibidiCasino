@@ -53,13 +53,10 @@ function confirm(){
 }
 
 function pay(){
-    location.href = "loading.html";
-
+    setTimeout(function () {location.href = "loading.html";}, 300);
 }
 
-function balance(){
-  var liczba = document.getElementById("numer").value;
-  document.cookie = `balance=${liczba}; path=/; domain=127.0.0.1`;
+function balance1(){
 
   function ciasteczko(nazwa) {
     var ciasteczka = document.cookie.split('; ');
@@ -71,4 +68,15 @@ function balance(){
     }
     return null;
 }
+var bal = ciasteczko('balance');
+var balNumber = parseFloat(bal);
+if (isNaN(balNumber)) balNumber = 0;
+
+var liczba = parseFloat(document.getElementById("numer").value);
+if (isNaN(liczba)) liczba = 0;
+var liczba1 = balNumber + liczba;
+
+document.cookie = `balance=${liczba1}; path=/; domain=127.0.0.1`;
+
    }
+

@@ -7,9 +7,10 @@
     <title>More</title>
     <link rel="icon" type="image/x-icon" href="../logo_smol1.png">
     <link rel="stylesheet" href="../style.css">
+    <script src="../balanceScript.js"></script>
 </head>
 
-<body>
+<body onload="balance()">
     <header>
         <div class="leftContainer">
             <div class="logo"><a class="logo" href="../index.html"><img id="logo" src="../logo0.png"> Skibidi Casino</a></div>
@@ -23,7 +24,7 @@
                         fill="none" stroke="rgb(123,44,191)" ; stroke-width="5" stroke-linecap="round"
                         stroke-linejoin="round">
                         <path d="M5 12H19M12 5V19" />
-                    </svg></a>&nbsp;0.00
+                    </svg></a>&nbsp;<div id="money"></div>
                 </div>
                 <a href="../account/settings.html">
                 <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="none" stroke-width="2.4">

@@ -1,7 +1,4 @@
 function balance(){
-   // var pole = document.getElementById("pole").value;
-   // document.cookie = `balance=${pole}; path=/; domain=127.0.0.1`;
-
 
     function ciasteczko(nazwa) {
         var ciasteczka = document.cookie.split('; ');
@@ -14,6 +11,11 @@ function balance(){
         return null;
     }
 
-    var money = ciasteczko('balance');
-    document.getElementById("money").innerHTML= money;
+    var bal = ciasteczko('balance');
+    var balNumber = parseFloat(bal);
+    if (isNaN(balNumber)) balNumber = 0;
+    if (bal === null || bal === "") {
+        bal = "0";
+    }
+    document.getElementById("money").innerHTML= bal;
     }
