@@ -1,92 +1,78 @@
-;(function(loader) {
-    document.addEventListener("DOMContentLoaded", loader[0], false);
-})([function (eventLoadedPage) {
-    "use strict";
+document.addEventListener('DOMContentLoaded', () => {
+    const debugEl = document.getElementById('debug');
+    const iconMap = ["banana", "seven", "cherry", "plum", "orange", "bell", "bar", "lemon", "melon"];
+    const icon_width = 79;
+    const icon_height = 79;
+    const num_icons = 9;
+    const time_per_icon = 100;
+    const indexes = [0, 0, 0];
+    const costPerSpin = 10;
 
-    function rand (min, max) {
-        return Math.floor(Math.random() * (max - min)) + min;
-    }
+    /**
+     * Roll one reel
+     */
+    const roll = (reel, offset = 0) => {
+        const delta = (offset + 2) * num_icons + Math.round(Math.random() * num_icons);
 
-    var wrap, colors;
-    // colors = ["red"]
-    var pallete = [
-        "r18", "b8", "r19", "g2", "r20", "r21", "b9", "r10",
-        "g3", "r11", "b4", "r12", "b5", "r13", "b6",
-        "r14", "g0", "r15", "b7", "r16", "g1", "r17"
-    ];
+        return new Promise((resolve) => {
+            const style = getComputedStyle(reel);
+            const backgroundPositionY = parseFloat(style["background-position-y"]);
+            const targetBackgroundPositionY = backgroundPositionY + delta * icon_height;
+            const normTargetBackgroundPositionY = targetBackgroundPositionY % (num_icons * icon_height);
 
-    var bets = {
-        "green": [2,3,0,1],
-        "red": [18, 19,20,21,10,11,12,13,14,15,16,17],
-        "black": [8,9,4,5,6,7,]
-    }
+            setTimeout(() => {
+                reel.style.transition = `background-position-y ${(8 + 1 * delta) * time_per_icon}ms cubic-bezier(.41,-0.01,.63,1.09)`;
+                reel.style.backgroundPositionY = `${backgroundPositionY + delta * icon_height}px`;
+            }, offset * 150);
 
-    var width = 80;
-
-    wrap = document.querySelector('.roulette-container .wrap');
-
-    function spin_promise (color, number) {
-        return new Promise((resolve, reject) => {
-            if (
-                (color === "green" || color === "g") && (number >= 0 && number <= 3) ||
-                (color === "black" || color === "b") && (number >= 4 && number <= 9) ||
-                (color === "red" || color === "r") && (number >= 10 && number <= 21) 
-            ) 
-            {
-                let index, pixels, circles, pixelsStart;
-    
-                color = color[0];
-                index = pallete.indexOf(color + "" + number);
-                pixels = width * (index + 1);
-                circles = 1760 * 15; // 15 circles
-    
-                pixels -= 80;
-                pixels = rand(pixels + 2, pixels + 79);
-                pixelsStart = pixels;
-                pixels += circles;
-                pixels *= -1;
-    
-                // Zmiana pozycji tła na osi Y (w pionie)
-                wrap.style.backgroundPosition = "0px " + ((pixels + (wrap.offsetHeight / 2)) + "") + "px";
-    
-                setTimeout(() => {
-                    wrap.style.transition = "none";
-                    let pos = (((pixels * -1) - circles) * -1) + (wrap.offsetHeight / 2);
-                    wrap.style.backgroundPosition = "0px " + String(pos) + "px";
-                    setTimeout(() => {
-                        wrap.style.transition = "background-position 5s";
-                        resolve();
-                    }, 510);
-    
-                }, 5000 + 700);
-            }
+            setTimeout(() => {
+                reel.style.transition = `none`;
+                reel.style.backgroundPositionY = `${normTargetBackgroundPositionY}px`;
+                resolve(delta % num_icons);
+            }, (8 + 1 * delta) * time_per_icon + offset * 150);
         });
+    };
+
+    /**
+     * Roll all reels, when promise resolves roll again
+     */
+    function rollAll() {
+        
+        const reelsList = document.querySelectorAll('.slots > .reel');
+
+        Promise.all([...reelsList].map((reel, i) => roll(reel, i)))
+            .then((deltas) => {
+                deltas.forEach((delta, i) => indexes[i] = (indexes[i] + delta) % num_icons);
+               
+                // Sprawdzenie warunków wygranej
+                let winAmount = 0;
+                if (indexes[0] === indexes[1] && indexes[1] === indexes[2]) {
+                    // Trzy takie same symbole - wygrana razy 10
+                    winAmount = 10 * costPerSpin;
+                } else if (indexes[0] === indexes[1] || indexes[1] === indexes[2]) {
+                    // Dwa takie same symbole - wygrana razy 5
+                    winAmount = 5 * costPerSpin;
+                }
+
+                if (winAmount > 0) {
+                   alert(`Gratulacje! Wygrana: ${winAmount}$`) ;
+                    const slotsEl = document.querySelector(".slots");
+                    const winCls = indexes[0] === indexes[2] ? "win2" : "win1";
+                    slotsEl.classList.add(winCls);
+                    setTimeout(() => slotsEl.classList.remove(winCls), 2000);
+                } else {
+                    alert("przegrałeś")
+                }
+            });
     }
-    
 
-    var i = 0;
-
-    function play () {
-
-        let color;
-        let r = rand(1, 1000);
-        if (1 <= r && r < 30) color = "green";
-        else if (30 <= r && r < 530) color = "red";
-        else if (530 <= r && r < 1000) color = "black";
-        let bet = bets[color][rand(0, bets[color].length)];
-        spin_promise(color, bet).then(()  => {
-            console.log("[Ended]");
-            let colorBeted = document.createElement("div");
-            colorBeted.setAttribute("class", "color-beted " + color[0]);
-            colorBeted.innerHTML = bet;
-            document.body.appendChild(colorBeted);
-
-            setTimeout(function () {
-                console.log("[Start game]");
-                play();
-            }, 2500);
+    // Sprawdzenie, czy przycisk istnieje przed przypisaniem zdarzenia
+    const startButton = document.getElementById('arm');
+    if (startButton) {
+        startButton.addEventListener('click', () => {
+            rollAll(); // Uruchomienie animacji po kliknięciu
         });
+    } else {
+        console.error('Nie znaleziono przycisku z ID "arm".');
     }
-
-    play();
-}]);
+});
