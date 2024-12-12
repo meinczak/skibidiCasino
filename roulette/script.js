@@ -1,15 +1,54 @@
-let totalchip = 0;
-
-let currentBets = [];
-let chips = [];
-function chipTotal(value) {
-  totalchip += value;
-  document.getElementById("chipvalue").innerHTML = totalchip;
+function getCookie(name) {
+  const cookies = document.cookie.split("; ");
+  for (let cookie of cookies) {
+    const [key, value] = cookie.split("=");
+    if (key === name) {
+      return value;
+    }
+  }
+  return null;
 }
+
+function setCookie(name, value, days) {
+  const date = new Date();
+  date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
+  document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/`;
+}
+
+const balanceCookie = getCookie("balance");
+let balanceCook = balanceCookie !== null ? Number(balanceCookie) : 0;
+if (isNaN(balanceCook)) {
+  balanceCook = 0;
+}
+
+const chipsCookie = getCookie("chips");
+let chipsData = chipsCookie !== null ? JSON.parse(chipsCookie) : [];
+
+let isSpinning = false;
+
+let totalchip = 0;
+let currentBets = [];
+let chips = [...chipsData]; // Initialize chips from the cookie
+
+// Update the balance and chip display
+function updateBalanceDisplay() {
+  document.getElementById("money").innerHTML = balanceCook;
+}
+
+function chipTotal(value) {
+  if (totalchip + value > balanceCook) { // Fixed the chip creation condition
+    alert("Nie masz wystarczającego balansu!");
+  } else {
+    totalchip += value;
+    document.getElementById("chipvalue").innerHTML = totalchip;
+  }
+}
+
 function resetChip() {
   document.getElementById("chipvalue").innerHTML = "";
   totalchip = 0;
 }
+
 function resetTable() {
   document.querySelectorAll(".chipontable").forEach((el) => el.remove());
   currentBets = [];
@@ -17,26 +56,29 @@ function resetTable() {
     cell.innerHTML = cell.dataset.in;
   });
 }
+
 function table(grid) {
   if (totalchip <= 0) {
     alert("Najpierw wybierz żetony!");
     return;
   }
-
+  if (balanceCook === 0 || totalchip > balanceCook) { // Added balance check before placing a bet
+    alert("Nie masz wystarczającego salda do postawienia zakładu!");
+    return;
+  }
   var clickedCell = document.getElementById(grid);
   if (clickedCell) {
     let betType = clickedCell.getAttribute("data-type");
     let betValue = clickedCell.getAttribute("data-value");
 
-    console.log(`Wybrano: Typ - ${betType}, Wartość - ${betValue}`);
-
     if (
       currentBets.some((bet) => bet.type === betType && bet.value === betValue)
     ) {
-      alert("Zakład na to pole już został postawiony!");
       return;
     }
-
+    if (isSpinning) {
+      return;
+    }
     currentBets.push({ type: betType, value: betValue });
 
     var chip = document.createElement("button");
@@ -48,24 +90,40 @@ function table(grid) {
     chips.push({ valueofBet: totalchip, grid: betValue });
     clickedCell.innerHTML = "";
     clickedCell.appendChild(chip);
+    balanceCook -= totalchip;
+    setCookie("balance", balanceCook, 7);
+    setCookie("chips", JSON.stringify(chips), 7); // Save chips to cookie
+    updateBalanceDisplay();
   }
 }
 
 document.addEventListener("contextmenu", (event) => {
+  if (isSpinning) {
+    return;
+  }
+
   if (event.target.classList.contains("chipontable")) {
     event.preventDefault();
 
     const chip = event.target;
     const parentCell = chip.parentElement;
-    const originalValuev = parentCell.getAttribute("data-value")
-    const originalValue = parentCell.getAttribute("data-in");
-    parentCell.innerHTML = originalValue;
+    const originalValuev = parentCell.getAttribute("data-in");
+    const originalValue = parentCell.getAttribute("data-value");
+
+    const chipObject = chips.find((c) => c.grid === originalValue);
+    const chipValue = chipObject ? chipObject.valueofBet : 0;
+
+    parentCell.innerHTML = originalValuev;
 
     chips = chips.filter((c) => c.grid !== originalValue);
 
-    currentBets = currentBets.filter((bet) => bet.value !== originalValuev);
+    balanceCook += chipValue;
+    setCookie("balance", balanceCook, 7);
+    setCookie("chips", JSON.stringify(chips), 7); // Update chips in cookie
 
-    console.log(`Chip na polu ${originalValue} został usunięty.`);
+    updateBalanceDisplay();
+
+    currentBets = currentBets.filter((bet) => bet.value !== originalValue);
   }
 });
 
@@ -80,28 +138,7 @@ document.addEventListener("contextmenu", (event) => {
     }
 
     var pallete = [
-      "r18",
-      "b8",
-      "r19",
-      "g2",
-      "r20",
-      "r21",
-      "b9",
-      "r10",
-      "g3",
-      "r11",
-      "b4",
-      "r12",
-      "b5",
-      "r13",
-      "b6",
-      "r14",
-      "g0",
-      "r15",
-      "b7",
-      "r16",
-      "g1",
-      "r17",
+      "r18", "b8", "r19", "g2", "r20", "r21", "b9", "r10", "g3", "r11", "b4", "r12", "b5", "r13", "b6", "r14", "g0", "r15", "b7", "r16", "g1", "r17",
     ];
 
     var bets = {
@@ -139,6 +176,9 @@ document.addEventListener("contextmenu", (event) => {
     }
 
     function play(betType, betValue, betAmount) {
+      document.getElementById("placeBet").disabled = true;
+      document.getElementById("resetchip").disabled = true;
+      document.getElementById("resetbet").disabled = true;
       let color;
       let bet;
       let r = rand(1, 1000);
@@ -148,6 +188,8 @@ document.addEventListener("contextmenu", (event) => {
       else color = "black";
 
       bet = bets[color][rand(0, bets[color].length)];
+
+      isSpinning = true;
 
       spin_promise(color, bet).then(() => {
         let totalWin = 0;
@@ -161,26 +203,25 @@ document.addEventListener("contextmenu", (event) => {
           );
 
           if (!foundChip) {
-            console.log(`Brak chipa na polu ${currentBet.value}`);
             return;
           }
 
           if (currentBet.type === "number" && currentBet.value == bet) {
             win = true;
-            multiplier = 2.2;
+            multiplier = 3.0;
           } else if (
             currentBet.type === "color" &&
             currentBet.value === color
           ) {
             win = true;
-            multiplier = 1.2;
+            multiplier = 2.0;
           } else if (
             currentBet.type === "parity" &&
             ((currentBet.value === "odd" && bet % 2 !== 0) ||
               (currentBet.value === "even" && bet % 2 === 0))
           ) {
             win = true;
-            multiplier = 1.5;
+            multiplier = 2.5;
           } else if (currentBet.type === "range") {
             if (
               (currentBet.value === "1 to 7" && bet >= 1 && bet <= 7) ||
@@ -188,14 +229,17 @@ document.addEventListener("contextmenu", (event) => {
               (currentBet.value === "15 to 21" && bet >= 15 && bet <= 21)
             ) {
               win = true;
-              multiplier = 1.9;
+              multiplier = 1.5;
             }
           }
 
           if (win) {
             const chipWin = foundChip.valueofBet * multiplier;
+
+            balanceCook += chipWin;
+            document.getElementById("money").innerHTML = balanceCook;
+            setCookie("balance", balanceCook, 7);
             totalWin += chipWin;
-            console.log(`Wygrana na polu ${currentBet.value}: ${chipWin}`);
           }
         });
 
@@ -213,25 +257,13 @@ document.addEventListener("contextmenu", (event) => {
         document.getElementById("placeBet").disabled = false;
         document.getElementById("resetchip").disabled = false;
         document.getElementById("resetbet").disabled = false;
+
+        isSpinning = false;
       });
     }
+
     document.getElementById("placeBet").addEventListener("click", function () {
-      if (currentBets.length === 0) {
-        alert("Najpierw wybierz pole zakładu.");
-        return;
-      }
-
-      if (totalchip <= 0) {
-        alert("Musisz postawić co najmniej 1 żeton.");
-        return;
-      }
-
-      document.getElementById("placeBet").disabled = true;
-  
-      document.getElementById("resetchip").disabled = true;
-      document.getElementById("resetbet").disabled = true;
-
-      play(currentBets[0].type, currentBets[0].value, totalchip);
+      play();
     });
   },
 ]);
