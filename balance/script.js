@@ -36,7 +36,7 @@ function confirm(){
           };
     }
     else{
-    document.getElementById("kwota").innerHTML = "The deposit amount: " + amt + "PLN";
+    document.getElementById("kwota").innerHTML = "The deposit amount: " + amt + "$";
     document.getElementById("kwota").style.display = "block";
     document.getElementById("error").style.display = "none";
     document.getElementById("payment").disabled = false;

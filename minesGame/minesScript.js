@@ -1,3 +1,14 @@
+function ciasteczko(nazwa) {
+    var ciasteczka = document.cookie.split('; ');
+    for (var i = 0; i < ciasteczka.length; i++) {
+        var [ciastko, wartosc] = ciasteczka[i].split('=');
+        if (ciastko === nazwa) {
+            return decodeURIComponent(wartosc);
+        }
+    }
+    return null;
+}
+
 const minesInput = document.getElementById("minesInput");
 const betInput = document.getElementById("betInput");
 const minesLabel = document.getElementById("minesLabel");
@@ -42,7 +53,7 @@ const multiplier = [
 ];
 
 let hasBet = false;
-let balance = 1000;
+let balance = ciasteczko('balance');
 let mines = [];
 let gemsClicked = [];
 let totalGemsNumber;
@@ -59,6 +70,8 @@ function gameStart() {
     } 
     hasBet = true;
     balance = balance - betInput.value;
+    document.cookie = `balance=${balance}; path=/; domain=127.0.0.1`;
+    document.getElementById("money").innerHTML= balance+"$";
     betInput.readOnly = true;
     gemsClicked = [];
     profitLabel.innerHTML = "Profit (x1)"
@@ -166,6 +179,7 @@ function changeStyle(style) {
             gameResult.innerHTML = "You Won!";
             gameResult.style.display = "initial";
             playAgainBtn.style.display = "initial";
+            document.getElementById("money").innerHTML= balance+"$";
             break;
         case "gameLost":
             minesInput.style.display = "none";
@@ -179,6 +193,7 @@ function changeStyle(style) {
             gameResult.innerHTML = "You Lost!";
             gameResult.style.display = "initial";
             playAgainBtn.style.display = "initial";
+            document.getElementById("money").innerHTML= balance+"$";
             break;
     }
 }
@@ -198,5 +213,6 @@ function cashout() {
     changeStyle("initial");
     hasBet = false;
     balance = parseFloat(balance) + parseFloat(profit.value);
+    document.getElementById("money").innerHTML= balance+"$";
 }
 changeStyle("initial");

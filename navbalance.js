@@ -17,5 +17,5 @@ function navbalance(){
     if (bal === null || bal === "") {
         bal = "0";
     }
-    document.getElementById("money").innerHTML= bal;
+    document.getElementById("money").innerHTML= bal+"$";
     }

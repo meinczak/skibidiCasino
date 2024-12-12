@@ -97,7 +97,7 @@
     left: 50%;
     opacity: 0;
     pointer-events: none;
-    font-size: 60px;
+    font-size: 3vw;
     transition: 0.5s;
     color: white;
     font-weight: 500;
