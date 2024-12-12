@@ -12,7 +12,7 @@ function getCookie(name) {
 function setCookie(name, value, days) {
   const date = new Date();
   date.setTime(date.getTime() + days * 24 * 60 * 60 * 1000);
-  document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/; meinczak.github.io; expires=Tue, 01 Jan 2030 00:00:00 UTC; Secure`;
+  document.cookie = `${name}=${value}; expires=${date.toUTCString()}; path=/; domain=meinczak.github.io; expires=Tue, 01 Jan 2030 00:00:00 UTC; Secure`;
 }
 
 const balanceCookie = getCookie("balance");
