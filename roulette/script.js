@@ -21,18 +21,16 @@ if (isNaN(balanceCook)) {
   balanceCook = 0;
 }
 
-const chipsCookie = getCookie("chips");
-let chipsData = chipsCookie !== null ? JSON.parse(chipsCookie) : [];
 
 let isSpinning = false;
 
 let totalchip = 0;
 let currentBets = [];
-let chips = [...chipsData]; // Initialize chips from the cookie
+let chips = []; // Initialize chips from the cookie
 
 // Update the balance and chip display
 function updateBalanceDisplay() {
-  document.getElementById("money").innerHTML = balanceCook;
+  document.getElementById("money").innerHTML = balanceCook+"$";
 }
 
 function chipTotal(value) {
@@ -92,7 +90,6 @@ function table(grid) {
     clickedCell.appendChild(chip);
     balanceCook -= totalchip;
     setCookie("balance", balanceCook, 7);
-    setCookie("chips", JSON.stringify(chips), 7); // Save chips to cookie
     updateBalanceDisplay();
   }
 }
@@ -119,7 +116,7 @@ document.addEventListener("contextmenu", (event) => {
 
     balanceCook += chipValue;
     setCookie("balance", balanceCook, 7);
-    setCookie("chips", JSON.stringify(chips), 7); // Update chips in cookie
+
 
     updateBalanceDisplay();
 
@@ -237,7 +234,7 @@ document.addEventListener("contextmenu", (event) => {
             const chipWin = foundChip.valueofBet * multiplier;
 
             balanceCook += chipWin;
-            document.getElementById("money").innerHTML = balanceCook;
+            document.getElementById("money").innerHTML = balanceCook+"$";
             setCookie("balance", balanceCook, 7);
             totalWin += chipWin;
           }
@@ -251,6 +248,7 @@ document.addEventListener("contextmenu", (event) => {
 
         resetChip();
         resetTable();
+        location.reload();
 
         currentBets = [];
 
