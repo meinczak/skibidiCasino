@@ -52,16 +52,17 @@ const playAgainBtn = document.getElementById("playAgainBtn");
 let playedCards = [];                 
 let hiddenCard;
 let playingStations = [];
-let currentPlayingStation;
+let currentPlayingStation = 0;
 
 let dealer = {handValue: 0, aceCount: 0, handLength: 0, hasBusted: false, cardsId: ["dealerCard1", "dealerCard2", "dealerCard3", "dealerCard4", "dealerCard5"]};
 class Station {
-    constructor(handValue, aceCount, betValue, handLength, hasBusted, betInput, totalDisplay, betDisplay, status, stationId, cardsId) {
+    constructor(handValue, aceCount, betValue, handLength, hasBusted, hasInsurance, betInput, totalDisplay, betDisplay, status, stationId, cardsId) {
         this.handValue = handValue;
         this.aceCount = aceCount;
         this.betValue = betValue;
         this.handLength = handLength;
         this.hasBusted = hasBusted;
+        this.hasInsurance = hasInsurance;
         this.betInput = betInput;
         this.totalDisplay = totalDisplay;
         this.betDisplay = betDisplay;
@@ -71,9 +72,9 @@ class Station {
     }
 }
 
-let station1 = new Station(0, 0, 0, 0, false, document.getElementById("input1"), document.getElementById("station1Total"), document.getElementById("station1BetDisplay"), document.getElementById("station1Status"), document.getElementById("station1"), ["station1id1", "station1id2", "station1id3", "station1id4", "station1id5"]);
-let station2 = new Station(0, 0, 0, 0, false, document.getElementById("input2"), document.getElementById("station2Total"), document.getElementById("station2BetDisplay"), document.getElementById("station2Status"), document.getElementById("station2"), ["station2id1", "station2id2", "station2id3", "station2id4", "station2id5"]);
-let station3 = new Station(0, 0, 0, 0, false, document.getElementById("input3"), document.getElementById("station3Total"), document.getElementById("station3BetDisplay"), document.getElementById("station3Status"), document.getElementById("station3"), ["station3id1", "station3id2", "station3id3", "station3id4", "station3id5"]);
+let station1 = new Station(0, 0, 0, 0, false, false, document.getElementById("input1"), document.getElementById("station1Total"), document.getElementById("station1BetDisplay"), document.getElementById("station1Status"), document.getElementById("station1"), ["station1id1", "station1id2", "station1id3", "station1id4", "station1id5"]);
+let station2 = new Station(0, 0, 0, 0, false, false, document.getElementById("input2"), document.getElementById("station2Total"), document.getElementById("station2BetDisplay"), document.getElementById("station2Status"), document.getElementById("station2"), ["station2id1", "station2id2", "station2id3", "station2id4", "station2id5"]);
+let station3 = new Station(0, 0, 0, 0, false, false, document.getElementById("input3"), document.getElementById("station3Total"), document.getElementById("station3BetDisplay"), document.getElementById("station3Status"), document.getElementById("station3"), ["station3id1", "station3id2", "station3id3", "station3id4", "station3id5"]);
 
 function draw(target) {
 
@@ -115,8 +116,8 @@ function draw(target) {
                     dealersTotalDisplay.innerHTML = dealer.handValue;
             } else if (target == "hidden") {
                 hiddenCard = drawnCard;
-                document.getElementById(dealer.cardsId[dealer.handLength]).style.animation = "cardDrawing 0.375s";
                 document.getElementById(dealer.cardsId[dealer.handLength]).innerHTML = `<div class="hiddenCard"><img class="card-front" id="hiddenCardDisplay" src=""><img class="card-back" src="deck/reverse.png"></div>`;
+                dealer.handLength++;
                 if (deck[drawnCard].cardValue === "A") {
                     dealer.aceCount++;
                     dealer.handValue += 11;
@@ -186,13 +187,6 @@ function start() {
     popUp.style.display = "none";
     container.style.filter = "brightness(1)";
     playAgainBtn.style.display = "none";
-
-    playedCards = [];
-    currentPlayingStation = 0;
-    dealer.handValue = 0;
-    dealer.aceCount = 0;
-    dealer.handLength = 0;
-    dealersTotalDisplay.innerHTML = "";
     
     if (playingStations.length === 1) {
         playingStations[0].stationId.style.transform = "rotate(0turn)";
@@ -259,7 +253,7 @@ function hit() {
         playingStations[currentPlayingStation].status.innerHTML = "BUST!";
         playingStations[currentPlayingStation].hasBusted = true;   
     }
-    if (playingStations[currentPlayingStation].handValue >= 21) {       
+    if (playingStations[currentPlayingStation].handValue >= 21 || playingStations[currentPlayingStation].handLength == 5) {       
         stand();
     }
     doubleBtn.style.display = "none";
@@ -267,21 +261,19 @@ function hit() {
 
 function stand() {
     playingStations[currentPlayingStation].stationId.classList.remove("stationSelected");
-    if (playingStations[currentPlayingStation].status.innerHTML + 1 == "Black Jack!") {
-        stand();
+
+    currentPlayingStation++;
+
+    if (dealer.handValue == 11) {
+        insuranceBtn.style.display = "flex";
     }
-    currentPlayingStation++
     doubleBtn.style.display = "flex";
 
     if (currentPlayingStation + 1 > playingStations.length) {
 
         let gameWinnings = 0;
 
-        isGameOn = false;
-        document.getElementById(dealer.cardsId[1]).style.animation = "none";
-        document.getElementById(dealer.cardsId[1]).style.animation = "cardRotation 0.375s";
-        document.getElementById(dealer.cardsId[1]).style.transform = "rotateY('180deg')";
-        document.getElementById("hiddenCardDisplay").src = `deck/${deck[hiddenCard].cardValue}${deck[hiddenCard].suit}.png`;
+        document.getElementById(dealer.cardsId[1]).innerHTML = `<div class="hiddenCardShown"><img class="card-front" id="hiddenCardDisplay" src="deck/${deck[hiddenCard].cardValue}${deck[hiddenCard].suit}.png"><img class="card-back" src="deck/reverse.png"></div>`
 
         dealersTotalDisplay.innerHTML = dealer.handValue;
         
@@ -319,10 +311,18 @@ function stand() {
             }
         }
         playAgainBtn.style.display = "inline";
+        hitBtn.style.display = "none";
+        standBtn.style.display = "none";
+        insuranceBtn.style.display = "none";
+        doubleBtn.style.display = "none";
 
     } else {
         playingStations[currentPlayingStation].stationId.classList.add("stationSelected");
+        if (playingStations[currentPlayingStation].status.innerHTML == "Black Jack!") {
+            stand();
+        }
     }
+
     
 }
 
@@ -335,5 +335,15 @@ function double() {
             playingStations[currentPlayingStation].hasBusted = true;   
         }
         stand();
+    }
+}
+
+function insurance() {
+    if (balance > playingStations[currentPlayingStation].betValue / 2) {
+        balance -= playingStations[currentPlayingStation].betValue / 2;
+        playingStations[currentPlayingStation].hasInsurance = true;
+        insuranceBtn.style.display = "none";
+    } else {
+        alert("Not enough balance to do that!");
     }
 }
