@@ -177,26 +177,32 @@ function start() {
 
     playingStations = [];
     document.cookie = `balance=${balance}; path=/; domain=127.0.0.1`;
-    document.getElementById("money").innerHTML= balance+"$";
+    document.getElementById("money").innerHTML= balance + "$";
 
-    if (station1.betInput.value > 0 ) {
-        playingStations.push(station1);
-        station1.stationId.style.display = "inline";
+    if (station1.betInput.value > 100000 || station2.betInput.value > 100000 || station3.betInput.value > 100000) {
+        alert("Max bet limit is 100000!");
+        return
     } else {
-        station1.stationId.style.display = "none";
+        if (station1.betInput.value > 0) {
+            playingStations.push(station1);
+            station1.stationId.style.display = "inline";
+        } else {
+            station1.stationId.style.display = "none";
+        }
+        if (station2.betInput.value > 0) {
+            playingStations.push(station2);
+            station2.stationId.style.display = "inline";
+        } else {
+            station2.stationId.style.display = "none";
+        }
+        if (station3.betInput.value > 0) {
+            playingStations.push(station3);
+            station3.stationId.style.display = "inline";
+        } else {
+            station3.stationId.style.display = "none";
+        }
     }
-    if (station2.betInput.value > 0) {
-        playingStations.push(station2);
-        station2.stationId.style.display = "inline";
-    } else {
-        station2.stationId.style.display = "none";
-    }
-    if (station3.betInput.value > 0) {
-        playingStations.push(station3);
-        station3.stationId.style.display = "inline";
-    } else {
-        station3.stationId.style.display = "none";
-    }
+    
 
     if (playingStations.length == 0) {
         alert("Input a bet first!");
@@ -206,7 +212,8 @@ function start() {
         alert("Not enough balance to do that");
         return;
     } else {
-        balance -= station1.betInput.value + station2.betInput.value + station3.betInput.value;
+        balance -= Number(station1.betInput.value) + Number(station2.betInput.value) + Number(station3.betInput.value);
+        document.getElementById("money").innerHTML= balance.toFixed(2) + "$";
     }
 
     popUp.style.display = "none";
@@ -335,6 +342,10 @@ function stand() {
                 playingStations[i].status.innerHTML = "You Lose!";
             }
         }
+
+        balance += gameWinnings;
+        document.cookie = `balance=${balance.toFixed(2)}; path=/; domain=127.0.0.1`;
+        document.getElementById("money").innerHTML= balance.toFixed(2) + "$";
         playAgainBtn.style.display = "inline";
         hitBtn.style.display = "none";
         standBtn.style.display = "none";
