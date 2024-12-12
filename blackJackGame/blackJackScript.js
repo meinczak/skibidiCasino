@@ -1,3 +1,19 @@
+function ciasteczko(nazwa) {
+    var ciasteczka = document.cookie.split('; ');
+    for (var i = 0; i < ciasteczka.length; i++) {
+        var [ciastko, wartosc] = ciasteczka[i].split('=');
+        if (ciastko === nazwa) {
+            return decodeURIComponent(wartosc);
+        }
+    }
+    return null;
+} 
+//funkcja na zczytywanie cookisow z przegladarki
+//var zmienna = ciasteczko('balance');                                              - zczytywanie balansu z cookiesa
+//document.cookie = `balance=${balance}; path=/; domain=127.0.0.1`;                 - nadpisywanie cookiesa z balansem/update balasnu
+//document.getElementById("money").innerHTML= balance+"$";                          - odswiezenie wyswietlanego balansu w navie/najlepiej do dania po komendzie wyzej ale jak wolisz
+
+
 //nasz deck używa 2 tali kart (łącznie 104 karty)
 const deck = [
     { cardValue: "A", suit: "S" }, { cardValue: "A", suit: "H" }, { cardValue: "A", suit: "D" }, { cardValue: "A", suit: "C" },
