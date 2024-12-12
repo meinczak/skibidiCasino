@@ -69,6 +69,7 @@ let playedCards = [];
 let hiddenCard;
 let playingStations = [];
 let currentPlayingStation = 0;
+let balance = ciasteczko('balance');
 
 let dealer = {handValue: 0, aceCount: 0, handLength: 0, hasBusted: false, cardsId: ["dealerCard1", "dealerCard2", "dealerCard3", "dealerCard4", "dealerCard5"]};
 class Station {
@@ -175,6 +176,8 @@ function draw(target) {
 function start() {
 
     playingStations = [];
+    document.cookie = `balance=${balance}; path=/; domain=127.0.0.1`;
+    document.getElementById("money").innerHTML= balance+"$";
 
     if (station1.betInput.value > 0 ) {
         playingStations.push(station1);
@@ -198,6 +201,12 @@ function start() {
     if (playingStations.length == 0) {
         alert("Input a bet first!");
         return;
+    }
+    if (station1.betInput.value + station2.betInput.value + station3.betInput.value > balance) {
+        alert("Not enough balance to do that");
+        return;
+    } else {
+        balance -= station1.betInput.value + station2.betInput.value + station3.betInput.value;
     }
 
     popUp.style.display = "none";
