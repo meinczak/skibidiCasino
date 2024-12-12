@@ -213,7 +213,7 @@ function randomTile () {
 function cashout() {
     changeStyle("initial");
     hasBet = false;
-    balance = (parseFloat(balance) + parseFloat(profit.value));
-    document.getElementById("money").innerHTML= balance.toFixed(2) + "$";
+    balance = (balance + profit.value);
+    document.getElementById("money").innerHTML= balance + "$";
 }
 changeStyle("initial");
