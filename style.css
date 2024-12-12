@@ -3,6 +3,11 @@
     src: url(Lexend-VariableFont_wght.ttf);
 }
 
+@font-face {
+    font-family: "Decaydence";
+    src: url(Decaydence\ Straight.otf);
+}
+
 * {
     font-family: "lexend";
 }
@@ -111,5 +116,10 @@ a:hover {
     #logo{
     height: 6vh;
     margin: 10px;
+}
+
+a.logo{
+    font-family: "Decaydence";
+    font-size: 2.5vw;
 }
 
