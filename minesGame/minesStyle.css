@@ -7,12 +7,14 @@
     position: absolute;
     top: 0;
     z-index: -1;
+    background: rgb(17,17,17);
+    background: linear-gradient(140deg, rgba(17,17,17,1) 0%, rgba(36,36,36,1) 100%);  
 }
 main {
     width: 65vw;
     height: 75vh;
     margin-top: 10vh;
-    background-color: #0c0c0c;
+    background-color: rgba(12, 12, 12, 0.65);
     border-radius: 15px;    
 }
 .logobar {
@@ -85,7 +87,6 @@ label {
 .changeInputBtn:hover{
 background-color: rgb(123, 44, 191);
 
-
 }
 .betBtn {
     width: 20vw;
@@ -94,15 +95,13 @@ background-color: rgb(123, 44, 191);
     background-color: rgba(123, 44, 191, 1);
     color: white;
     padding: 10px;
-    
     font-size: 3vh;
     margin-top: 20px;
-    transition-duration: 1s;
+    transition-duration: 0.5s;
 }
 .betBtn:hover{
     background-color: #272727;
-
-
+    scale: 1.025;
 }
 
 .select-wrapper {
@@ -127,8 +126,7 @@ background-color: rgb(123, 44, 191);
     
 }
 select::-webkit-scrollbar {
-    display: none; 
-    
+    display: none;    
 }
 
 select {
@@ -157,12 +155,10 @@ select {
     height: 67vh;
     display: flex;
     justify-content: center;
-    align-items: center;
-    
+    align-items: center;  
 }
 table {
-    border-spacing: 15px;
-    
+    border-spacing: 15px; 
 }
 .gameTable td {
     width: 80px;
@@ -176,8 +172,6 @@ table {
 td:hover
 {
     background-color: rgba(123, 44, 191, 1);
-
-
 }
 #gemsRemaining , #minesRemaining{
     background-color: #272727;
@@ -202,10 +196,8 @@ td:hover
     
 }
 #minesRemaining
-{
-   
+{ 
     background-image: url('mine.svg');
-  
     
 }
 #gameInfo
@@ -227,19 +219,14 @@ img {
     color: white;
     outline: none;
     cursor: pointer;
-  
     border-radius: 15px;
     padding: 10px;
     width: 18.5vw;
-   
-
-
 }
 #cashoutBtn, #randomTileBtn{
     background-color: #272727;
     border: none;
     text-align: center;
-    
     font-size:15px ;
     color: white;
     outline: none;
@@ -251,8 +238,7 @@ img {
     transition-duration: 1s;
 }
 #cashoutBtn:hover, #randomTileBtn:hover{
-    background-color: rgba(123, 44, 191, 1);
-    
+    background-color: rgba(123, 44, 191, 1);  
 }
 #cashoutBtn{
 flex: 25%;
@@ -269,4 +255,22 @@ margin-right: 2.5px;
 display: flex;
 width: 100%;
 
+}
+#gameResult {
+    color: white;
+    font-size: 5vh;
+}
+#playAgainBtn {
+    width: 15vw;
+    height: 5vh;
+    border: none;
+    border-radius: 2vh;
+    color: white;
+    background-color: rgba(123, 44, 191, 1);
+    font-weight: 700;
+    font-size: 2.5vh;
+    transition-duration: 0.2s;
+}
+#playAgainBtn:hover {
+    scale: 1.1;
 }
