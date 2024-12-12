@@ -63,7 +63,7 @@ function gameStart() {
     for (i = 1; i <= 25; i++) {
         document.getElementById(i).innerHTML = "";
         document.getElementById(i).style.backgroundColor = "#272727";
-        document.getElementById(i).style.border = "none"
+        document.getElementById(i).style.background = "#272727"
     }
     if (betInput.value > balance || betInput.value < 0.1) {
         return;
@@ -71,7 +71,7 @@ function gameStart() {
     hasBet = true;
     balance = balance - betInput.value;
     document.cookie = `balance=${balance}; path=/; domain=127.0.0.1`;
-    document.getElementById("money").innerHTML= balance+"$";
+    document.getElementById("money").innerHTML= balance.toFixed(2) + "$";
     betInput.readOnly = true;
     gemsClicked = [];
     profitLabel.innerHTML = "Profit (x1)"
@@ -101,7 +101,8 @@ function tileClick(tileId) {
     if (mines.includes(tileId)) {
                                                                                                                             // Mine Clicked
         document.getElementById(tileId).innerHTML= "<img src='mine.svg'>";
-        document.getElementById(tileId).style.border = "5px solid red";
+        document.getElementById(tileId).style.background = "rgb(195,51,51)"
+        document.getElementById(tileId).style.background = "radial-gradient(circle, rgba(195,51,51,1) 0%, rgba(0,0,0,1) 100%)"
         hasBet = false;
         betInput.readOnly = false;
         mines = [];
@@ -179,7 +180,7 @@ function changeStyle(style) {
             gameResult.innerHTML = "You Won!";
             gameResult.style.display = "initial";
             playAgainBtn.style.display = "initial";
-            document.getElementById("money").innerHTML= balance+"$";
+            document.getElementById("money").innerHTML = balance.toFixed(2) + "$";
             break;
         case "gameLost":
             minesInput.style.display = "none";
@@ -193,7 +194,7 @@ function changeStyle(style) {
             gameResult.innerHTML = "You Lost!";
             gameResult.style.display = "initial";
             playAgainBtn.style.display = "initial";
-            document.getElementById("money").innerHTML= balance+"$";
+            document.getElementById("money").innerHTML = balance.toFixed(2) + "$";
             break;
     }
 }
@@ -212,7 +213,7 @@ function randomTile () {
 function cashout() {
     changeStyle("initial");
     hasBet = false;
-    balance = parseFloat(balance) + parseFloat(profit.value);
-    document.getElementById("money").innerHTML= balance+"$";
+    balance = (parseFloat(balance) + parseFloat(profit.value));
+    document.getElementById("money").innerHTML= balance.toFixed(2) + "$";
 }
 changeStyle("initial");
