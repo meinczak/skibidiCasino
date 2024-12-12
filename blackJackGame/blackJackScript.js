@@ -176,7 +176,7 @@ function draw(target) {
 function start() {
 
     playingStations = [];
-    document.cookie = `balance=${balance}; path=/; domain=127.0.0.1`;
+    document.cookie = `balance=${balance}; path=/; domain=meinczak.github.io`;
     document.getElementById("money").innerHTML= balance + "$";
 
     if (station1.betInput.value > 100000 || station2.betInput.value > 100000 || station3.betInput.value > 100000) {
@@ -344,7 +344,7 @@ function stand() {
         }
 
         balance += gameWinnings;
-        document.cookie = `balance=${balance.toFixed(2)}; path=/; domain=127.0.0.1`;
+        document.cookie = `balance=${balance.toFixed(2)}; path=/; domain=meinczak.github.io`;
         document.getElementById("money").innerHTML= balance.toFixed(2) + "$";
         playAgainBtn.style.display = "inline";
         hitBtn.style.display = "none";

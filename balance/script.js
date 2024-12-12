@@ -76,7 +76,7 @@ var liczba = parseFloat(document.getElementById("numer").value);
 if (isNaN(liczba)) liczba = 0;
 var liczba1 = balNumber + liczba;
 
-document.cookie = `balance=${liczba1}; path=/; domain=127.0.0.1`;
+document.cookie = `balance=${liczba1}; path=/; domain=meinczak.github.io`;
 
    }
 
