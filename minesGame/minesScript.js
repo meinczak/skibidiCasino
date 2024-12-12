@@ -70,7 +70,7 @@ function gameStart() {
     } 
     hasBet = true;
     balance = balance - betInput.value;
-    document.cookie = `balance=${balance}; path=/; domain=meinczak.github.io`;
+    document.cookie = `balance=${balance}; path=/; domain=meinczak.github.io; expires=Tue, 01 Jan 2030 00:00:00 UTC`;
     document.getElementById("money").innerHTML= balance.toFixed(2) + "$";
     betInput.readOnly = true;
     gemsClicked = [];

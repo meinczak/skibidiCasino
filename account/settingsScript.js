@@ -1,6 +1,6 @@
 function nickname(){
     var pole = document.getElementById("pole").value;
-    document.cookie = `username=${pole}; path=/; domain=meinczak.github.io`;
+    document.cookie = `username=${pole}; path=/; domain=meinczak.github.io; expires=Tue, 01 Jan 2030 00:00:00 UTC`;
 
 
     function ciasteczko(nazwa) {
@@ -23,7 +23,7 @@ function nickname(){
     
     function mailfunkcja(){
         var pole1 = document.getElementById("pole1").value;
-        document.cookie = `email=${pole1}; path=/; domain=meinczak.github.io`;
+        document.cookie = `email=${pole1}; path=/; domain=meinczak.github.io; expires=Tue, 01 Jan 2030 00:00:00 UTC`;
     
     
         function ciasteczko(nazwa) {
