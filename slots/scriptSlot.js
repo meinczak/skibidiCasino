@@ -71,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
             alert("Niewystarczający balans, aby zagrać.");
             return;
         }
-    
+        document.getElementById("arm").disabled = true;
         balanceCook -= costPerSpin;
         setCookie('balance', balanceCook, 7);
         document.getElementById("money").innerHTML= balanceCook+"$";
@@ -106,11 +106,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     const slotsEl = document.querySelector(".slots");
                     const winCls = indexes[0] === indexes[2] ? "win2" : "win1";
                     slotsEl.classList.add(winCls);
+                    
                     setTimeout(() => slotsEl.classList.remove(winCls), 2000);
                 } else {
                     alert("Przegrałeś");
-                    console.log(balanceCook);
+                    
                 }
+                document.getElementById("arm").disabled = false;
             });
     }
     
