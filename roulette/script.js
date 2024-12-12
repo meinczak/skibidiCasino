@@ -21,20 +21,19 @@ if (isNaN(balanceCook)) {
   balanceCook = 0;
 }
 
-
 let isSpinning = false;
+let isBetPlaced = false;  // Dodana flaga do śledzenia, czy zakład został postawiony
 
 let totalchip = 0;
 let currentBets = [];
-let chips = []; // Initialize chips from the cookie
+let chips = [];
 
-// Update the balance and chip display
 function updateBalanceDisplay() {
-  document.getElementById("money").innerHTML = balanceCook+"$";
+  document.getElementById("money").innerHTML = balanceCook + "$";
 }
 
 function chipTotal(value) {
-  if (totalchip + value > balanceCook) { // Fixed the chip creation condition
+  if (totalchip + value > balanceCook) { 
     alert("Nie masz wystarczającego balansu!");
   } else {
     totalchip += value;
@@ -48,11 +47,27 @@ function resetChip() {
 }
 
 function resetTable() {
-  document.querySelectorAll(".chipontable").forEach((el) => el.remove());
-  currentBets = [];
-  document.querySelectorAll("#betType td").forEach((cell) => {
-    cell.innerHTML = cell.dataset.in;
+  document.querySelectorAll(".chipontable").forEach((chip) => {
+    const parentCell = chip.parentElement;
+    const originalValuev = parentCell.getAttribute("data-in");
+    const originalValue = parentCell.getAttribute("data-value");
+
+    const chipObject = chips.find((c) => c.grid === originalValue);
+    const chipValue = chipObject ? chipObject.valueofBet : 0;
+
+    parentCell.innerHTML = originalValuev;
+
+    chips = chips.filter((c) => c.grid !== originalValue);
+
+    balanceCook += chipValue;
+    setCookie("balance", balanceCook, 7);
+
+    updateBalanceDisplay();
+
+    currentBets = currentBets.filter((bet) => bet.value !== originalValue);
   });
+
+  document.querySelectorAll(".chipontable").forEach((el) => el.remove());
 }
 
 function table(grid) {
@@ -91,6 +106,8 @@ function table(grid) {
     balanceCook -= totalchip;
     setCookie("balance", balanceCook, 7);
     updateBalanceDisplay();
+
+    isBetPlaced = true;  // Ustawiamy flagę na true po postawieniu zakładu
   }
 }
 
@@ -116,7 +133,6 @@ document.addEventListener("contextmenu", (event) => {
 
     balanceCook += chipValue;
     setCookie("balance", balanceCook, 7);
-
 
     updateBalanceDisplay();
 
@@ -234,7 +250,7 @@ document.addEventListener("contextmenu", (event) => {
             const chipWin = foundChip.valueofBet * multiplier;
 
             balanceCook += chipWin;
-            document.getElementById("money").innerHTML = balanceCook+"$";
+            document.getElementById("money").innerHTML = balanceCook + "$";
             setCookie("balance", balanceCook, 7);
             totalWin += chipWin;
           }
@@ -246,8 +262,7 @@ document.addEventListener("contextmenu", (event) => {
           alert("Przegrałeś!");
         }
 
-        resetChip();
-        resetTable();
+       
         location.reload();
 
         currentBets = [];
@@ -261,7 +276,12 @@ document.addEventListener("contextmenu", (event) => {
     }
 
     document.getElementById("placeBet").addEventListener("click", function () {
-      play();
+      if (!isBetPlaced) {  // Sprawdzamy, czy zakład został postawiony przed pozwoleniem na kręcenie
+        alert("Najpierw postaw zakład!");
+        return;
+      }
+      
+      play();  // Uruchomienie gry, jeśli zakład został postawiony
     });
   },
 ]);
