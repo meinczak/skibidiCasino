@@ -27,7 +27,7 @@
 .roulete {
     height: 32vh;
     flex: 100%;
-    background-color: #272727;
+    background-color: #0c0c0c;
     overflow: hidden;
     position: relative;
 
@@ -37,7 +37,7 @@
 .slot {
     height: 67vh;
     flex: 33%;
-    background-color: #272727;
+    background-color: #0c0c0c;
     overflow: hidden;
     position: relative;
 }
@@ -46,7 +46,7 @@
 .minesweeper {
     height: 32vh;
     flex: 50%;
-    background-color: #272727;
+    background-color: #0c0c0c;
     overflow: hidden;
     position: relative;
 
