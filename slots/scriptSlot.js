@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById("arm").disabled = true;
         balanceCook -= costPerSpin;
         setCookie('balance', balanceCook, 7);
-        document.getElementById("money").innerHTML= balanceCook+"$";
+        document.getElementById("money").innerHTML = Number(balanceCook).toFixed(2) + "$";
         
     
         const reelsList = document.querySelectorAll('.slots > .reel');
@@ -96,7 +96,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (winAmount > 0) {
                     alert(`Gratulacje! Wygrana: $${winAmount}`);
                     balanceCook += winAmount;
-                    document.getElementById("money").innerHTML= balanceCook+"$";
+                    document.getElementById("money").innerHTML = Number(balanceCook).toFixed(2) + "$";
                     setCookie('balance', balanceCook, 7);
     
                     if (balanceDisplay) {

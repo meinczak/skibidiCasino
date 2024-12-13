@@ -29,7 +29,7 @@ let currentBets = [];
 let chips = [];
 
 function updateBalanceDisplay() {
-  document.getElementById("money").innerHTML = balanceCook + "$";
+  document.getElementById("money").innerHTML = Number(balanceCook).toFixed(2) + "$";
 }
 
 function chipTotal(value) {
@@ -250,7 +250,7 @@ document.addEventListener("contextmenu", (event) => {
             const chipWin = foundChip.valueofBet * multiplier;
 
             balanceCook += chipWin;
-            document.getElementById("money").innerHTML = balanceCook + "$";
+            document.getElementById("money").innerHTML = Number(balanceCook).toFixed(2) + "$";
             setCookie("balance", balanceCook, 7);
             totalWin += chipWin;
           }
