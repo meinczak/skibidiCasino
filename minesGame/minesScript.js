@@ -214,7 +214,7 @@ function cashout() {
     changeStyle("initial");
     hasBet = false;
     balance += profit.value;
-    document.getElementById("money").innerHTML= balance.toFixed(2) + "$";
+    document.getElementById("money").innerHTML= Number(balance).toFixed(2) + "$";
     document.cookie = `balance=${balance}; path=/; domain=meinczak.github.io; expires=Tue, 01 Jan 2030 00:00:00 UTC; Secure`;
 }
 changeStyle("initial");
