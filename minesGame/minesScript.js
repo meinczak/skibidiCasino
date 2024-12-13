@@ -69,7 +69,7 @@ function gameStart() {
         return;
     } 
     hasBet = true;
-    balance = balance - betInput.value;
+    balance -= betInput.value;
     document.cookie = `balance=${balance}; path=/; domain=meinczak.github.io; expires=Tue, 01 Jan 2030 00:00:00 UTC; Secure`;
     document.getElementById("money").innerHTML= balance.toFixed(2) + "$";
     betInput.readOnly = true;
@@ -213,7 +213,8 @@ function randomTile () {
 function cashout() {
     changeStyle("initial");
     hasBet = false;
-    balance = (balance + profit.value);
-    document.getElementById("money").innerHTML= balance + "$";
+    balance += profit.value;
+    document.getElementById("money").innerHTML= balance.toFixed(2) + "$";
+    document.cookie = `balance=${balance}; path=/; domain=meinczak.github.io; expires=Tue, 01 Jan 2030 00:00:00 UTC; Secure`;
 }
 changeStyle("initial");
