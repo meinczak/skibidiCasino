@@ -208,7 +208,7 @@ function start() {
         alert("Input a bet first!");
         return;
     }
-    if (Number(station1.betInput.value + station2.betInput.value + station3.betInput.value) > balance) {
+    if (Number(station1.betInput.value) + Number(station2.betInput.value) + Number(station3.betInput.value) > balance) {
         alert("Not enough balance to do that");
         return;
     } else {
